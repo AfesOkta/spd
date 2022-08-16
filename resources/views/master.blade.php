@@ -25,7 +25,7 @@
 		<div class="content" id="content-tab_pangkat">
             <h3>Pangkat</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addPangkatModal" data-toggle="modal">Tambah data</button>
-            <table class="table">
+            <table class="table datatable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -62,7 +62,7 @@
 		<div class="content" id="content-tab_golongan" style="display: none;">
             <h3>Golongan</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addGolonganModal" data-toggle="modal">Tambah data</button>
-            <table class="table">
+            <table class="table datatable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -98,7 +98,7 @@
 		<div class="content" id="content-tab_satker" style="display: none;">
             <h3>Satker</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addSatkerModal" data-toggle="modal">Tambah data</button>
-            <table class="table">
+            <table class="table datatable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -134,7 +134,7 @@
 		<div class="content" id="content-tab_status" style="display: none;">
             <h3>Status</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addStatusModal" data-toggle="modal">Tambah data</button>
-            <table class="table">
+            <table class="table datatable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -184,7 +184,7 @@
 @endsection
 
 @section('extra-js')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 
 <script>
 function switch_tab(tabId){
