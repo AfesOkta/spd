@@ -55,4 +55,42 @@ public function delete_golongan(Request $request){
     $golongan = Golongan::where('id_golongan',$request->input('id_golongan'))->delete();
     return redirect()->route('master')->with('tab', 'golongan');
 }
+// Satker
+public function edit_satker(Request $request){
+    $satker = Satker::find($request->input('id_satker'));
+    $satker->nama_satker = $request->input('nama_satker');
+    $satker->save();
+    return redirect()->route('master')->with('tab', 'satker');
+}
+public function add_satker(Request $request){
+    $satker = Satker::insert([
+        'id_satker'=>$request->input('id_satker'),
+        'nama_satker'=>$request->input('nama_satker')
+    ]);
+    return redirect()->route('master')->with('tab', 'satker');
+}
+
+public function delete_satker(Request $request){
+    $satker = Satker::where('id_satker',$request->input('id_satker'))->delete();
+    return redirect()->route('master')->with('tab', 'satker');
+}
+// Status
+public function edit_status(Request $request){
+    $status = Status::find($request->input('id_status'));
+    $status->nama_status = $request->input('nama_status');
+    $status->save();
+    return redirect()->route('master')->with('tab', 'status');
+}
+public function add_status(Request $request){
+    $status = Status::insert([
+        'id_status'=>$request->input('id_status'),
+        'nama_status'=>$request->input('nama_status')
+    ]);
+    return redirect()->route('master')->with('tab', 'status');
+}
+
+public function delete_status(Request $request){
+    $status = Status::where('id_status',$request->input('id_status'))->delete();
+    return redirect()->route('master')->with('tab', 'status');
+}
 }

@@ -21,6 +21,7 @@
         </ul>
 	</div>
 	<div class="card-body">
+<!-- ======================== Pangkat ============================= -->
 		<div class="content" id="content-tab_pangkat">
             <h3>Pangkat</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addPangkatModal" data-toggle="modal">Tambah data</button>
@@ -57,7 +58,7 @@
             </table>
         </div>
 
-        <!-- ======================== Golongan ============================= -->
+<!-- ======================== Golongan ============================= -->
 		<div class="content" id="content-tab_golongan" style="display: none;">
             <h3>Golongan</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addGolonganModal" data-toggle="modal">Tambah data</button>
@@ -93,19 +94,92 @@
                 </tbody>
             </table>
         </div>
+<!-- ======================== Satker ============================= -->
 		<div class="content" id="content-tab_satker" style="display: none;">
             <h3>Satker</h3>
+            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addSatkerModal" data-toggle="modal">Tambah data</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Satker</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $n=1;
+                    @endphp
+                    @foreach ($satker as $row)
+                        <tr>
+                            <td>{{$n++}}</td>
+                            <td>{{$row->nama_satker}}</td>
+                            <td>
+                                <button 
+                                    class="btn btn-warning btn-sm" 
+                                    onclick="fill_edit_satker('{{$row->id_satker}}','{{$row->nama_satker}}')"
+                                    data-toggle="modal" data-target="#editSatkerModal" >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Satker?')" href="{{route('delete-golongan',['id_golongan'=>$row->id_golongan])}}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+<!-- ======================== Status ============================= -->
 		<div class="content" id="content-tab_status" style="display: none;">
             <h3>Status</h3>
+            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addStatusModal" data-toggle="modal">Tambah data</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $n=1;
+                    @endphp
+                    @foreach ($status as $row)
+                        <tr>
+                            <td>{{$n++}}</td>
+                            <td>{{$row->nama_status}}</td>
+                            <td>
+                                <button 
+                                    class="btn btn-warning btn-sm" 
+                                    onclick="fill_edit_status('{{$row->id_status}}','{{$row->nama_status}}')"
+                                    data-toggle="modal" data-target="#editStatusModal" >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Status?')" href="{{route('delete-golongan',['id_golongan'=>$row->id_golongan])}}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 	</div>
 </div>
 @endsection
 <x-modal_edit_pangkat />
 <x-modal_add_pangkat />
+
 <x-modal_edit_golongan />
 <x-modal_add_golongan />
+
+<x-modal_edit_satker />
+<x-modal_add_satker />
+
+<x-modal_edit_satatus />
+<x-modal_add_satatus />
 
 @section('extra-js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -131,6 +205,20 @@ function fill_edit_golongan(id, nama)
     console.log({id:id, nama:nama})
     $('#form-golongan-id').val(id);
     $('#form-golongan-nama').val(nama);
+}
+
+function fill_edit_satker(id, nama)
+{
+    console.log({id:id, nama:nama})
+    $('#form-satker-id').val(id);
+    $('#form-satker-nama').val(nama);
+}
+
+function fill_edit_status(id, nama)
+{
+    console.log({id:id, nama:nama})
+    $('#form-status-id').val(id);
+    $('#form-status-nama').val(nama);
 }
 </script>
 
