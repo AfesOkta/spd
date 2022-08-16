@@ -1,5 +1,6 @@
 <x-headhtml />
 <body>
+@yield('modal') 
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <x-header />      
         <div class="app-main">
@@ -20,7 +21,8 @@
                             @yield('content')
                         </div>
                     </div>
-                    <x-footer />    
+                    <x-footer />   
+                    
                 </div>
                 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>

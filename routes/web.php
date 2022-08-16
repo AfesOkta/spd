@@ -31,3 +31,13 @@ Route::post('/add_golongan', [MasterController::class, 'add_golongan'])->name('a
 Route::post('/edit_golongan', [MasterController::class, 'edit_golongan'])->name('edit-golongan');
 Route::get('/delete_golongan', [MasterController::class, 'delete_golongan'])->name('delete-golongan');
 
+// Satker
+Route::post('/add_satker', [MasterController::class, 'add_satker'])->name('add-satker');
+Route::post('/edit_satker', [MasterController::class, 'edit_satker'])->name('edit-satker');
+Route::get('/delete_satker', [MasterController::class, 'delete_satker'])->name('delete-satker');
+
+// Status
+Route::post('/add_status', [MasterController::class, 'add_status'])->name('add-status');
+Route::post('/edit_status', [MasterController::class, 'edit_status'])->name('edit-status');
+Route::get('/delete_status', [MasterController::class, 'delete_status'])->name('delete-status');
+

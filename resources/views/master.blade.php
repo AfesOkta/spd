@@ -121,7 +121,7 @@
                                     data-toggle="modal" data-target="#editSatkerModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Satker?')" href="{{route('delete-golongan',['id_golongan'=>$row->id_golongan])}}">
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Satker?')" href="{{route('delete-satker',['id_satker'=>$row->id_satker])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -157,7 +157,7 @@
                                     data-toggle="modal" data-target="#editStatusModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Status?')" href="{{route('delete-golongan',['id_golongan'=>$row->id_golongan])}}">
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Status?')" href="{{route('delete-status',['id_status'=>$row->id_status])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -169,6 +169,7 @@
 	</div>
 </div>
 @endsection
+@section('modal')
 <x-modal_edit_pangkat />
 <x-modal_add_pangkat />
 
@@ -178,8 +179,9 @@
 <x-modal_edit_satker />
 <x-modal_add_satker />
 
-<x-modal_edit_satatus />
-<x-modal_add_satatus />
+<x-modal_edit_status />
+<x-modal_add_status />
+@endsection
 
 @section('extra-js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
