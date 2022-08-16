@@ -31,8 +31,22 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $('.datatable').DataTable();
+
+    @if(session('msg-success'))
+    // Display a success toast, with a title
+    toastr.success('Success', '{{session('msg-success')}}')
+    @endif
+    @if(session('msg-warning'))
+    // Display a error toast, with a title
+    toastr.error('{{session('msg-warning')}}')
+    @endif
+    @if(session('msg-error'))
+    // Display a error toast, with a title
+    toastr.error('{{session('msg-error')}}')
+    @endif
 </script>
 @yield('extra-js')
 </body>

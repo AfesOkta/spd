@@ -41,3 +41,9 @@ Route::post('/add_status', [MasterController::class, 'add_status'])->name('add-s
 Route::post('/edit_status', [MasterController::class, 'edit_status'])->name('edit-status');
 Route::get('/delete_status', [MasterController::class, 'delete_status'])->name('delete-status');
 
+// Personel
+Route::get('/get_personel_data', [PersonelController::class, 'get_personel_data'])->name('get-personel-data');
+Route::post('/add_personel', [PersonelController::class, 'add_personel'])->name('add-personel');
+Route::post('/edit_personel', [PersonelController::class, 'edit_personel'])->name('edit-personel');
+Route::get('/delete_personel/{nrp}', [PersonelController::class, 'delete_personel'])->name('delete-personel');
+

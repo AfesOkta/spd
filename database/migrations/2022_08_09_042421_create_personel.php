@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('personel', function (Blueprint $table) {
-            $table->increments('nrp')->primary;
+            $table->string('nrp', 10)->primary();
             $table->string('nama_personel', 50);
             $table->string('jabatan', 50);
-            $table->string('pangkat', 10);  // fk
-            $table->string('golongan', 10); // fk
-            $table->string('satker', 10);   // fk
-            $table->string('status', 10);   // fk
+            $table->string('id_pangkat', 10);  // fk
+            $table->string('id_golongan', 10); // fk
+            $table->string('id_satker', 10);   // fk
+            $table->string('id_status', 10);   // fk
         });
     }
 
