@@ -103,7 +103,7 @@
 		<h4>Data Personel</h4>
 	</div>
 	<div class="card-body">
-		<table class="mb-0 table table-hover datatable">
+		<table class="mb-0 table table-hover table-responsive datatable">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -131,10 +131,14 @@
 						<td>{{$row->jabatan}}</td>
 						<td>{{$row->satker?$row->satker->nama_satker:''}}</td>
 						<td>{{$row->status?$row->status->nama_status:''}}</td>
-						<td>
+						<td nowrap>
+							<button class="btn btn-warning btn-sm" onclick="fill_edit('{{$row->nrp}}')">
+								<i class="fa fa-edit"></i>
+							</button>
 							<a 
+								class="btn btn-danger btn-sm"
 								onclick="return confirm('Hapus Personel?')" 
-								href="{{route('delete-personel', ['nrp' => $row->nrp ])}}">Hapus</a>
+								href="{{route('delete-personel', ['nrp' => $row->nrp ])}}"><i class="fa fa-trash"></i></a>
 						</td>
 					</tr>
 				@endforeach
@@ -160,5 +164,12 @@
 			$('#formStatus').val(data.id_status);
 		});
 	});
+
+	
+    function fill_edit(nrp){
+		$('#formNRP').val(nrp);
+        $('#btn-search').click();
+        $('#formNRP').focus()
+    }
 </script>
 @endsection

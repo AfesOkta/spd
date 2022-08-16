@@ -40,25 +40,25 @@
                 </li>
                 <li class="app-sidebar__heading">DATA</li>
                 <li>
-                    <a href="{{route('personel')}}" lass="@yield('personel-menu')">
+                    <a href="{{route('personel')}}" class="@yield('personel-menu')">
                         <i class="metismenu-icon pe-7s-users"></i>
                         Personel
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('pejabat')}}" class="@yield('pejabat-menu')">
                         <i class="metismenu-icon fa fa-suitcase"></i>
                         Pejabat
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" class="@yield('pagu-menu')">
                         <i class="metismenu-icon pe-7s-cash"></i>
                         Pagu
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('master')}}">
+                    <a href="{{route('master')}}" class="@yield('master-menu')">
                         <i class="metismenu-icon pe-7s-server"></i>
                         Master Data
                     </a>

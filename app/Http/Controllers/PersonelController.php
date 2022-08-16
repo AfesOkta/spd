@@ -26,7 +26,6 @@ class PersonelController extends Controller
     }
     public function add_personel(Request $request){
         $valid_input = $request->validate([
-            'nrp'=>'required',
             'nama_personel'=> 'required',  
             'jabatan'=> 'nullable',  
             'id_pangkat'=> 'required',  
@@ -36,14 +35,7 @@ class PersonelController extends Controller
         ]);
 
         // upsert
-        $res = Personel::upsert($valid_input, ['nrp'], [
-            'nama_personel',
-            'jabatan',
-            'id_pangkat',
-            'id_golongan',
-            'id_satker',
-            'id_status',
-        ]);
+        $res = Personel::updateOrCreate(['nrp'=>$request->input('nrp')], $valid_input);
         return redirect()->back()->with('msg-success', 'Data berhasil dirubah');
     }
 

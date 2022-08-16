@@ -1,7 +1,7 @@
 @extends('layout')
-@section('page-title', 'Personel')
-@section('page-title-desc', 'Data personel')
-@section('personel-menu', 'mm-active')
+@section('page-title', 'Master')
+@section('page-title-desc', 'Data Master')
+@section('master-menu', 'mm-active')
 @section('content')
 <div class="card col-12">
 	<div class="card-header p-2">

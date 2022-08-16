@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\PejabatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,3 +48,8 @@ Route::post('/add_personel', [PersonelController::class, 'add_personel'])->name(
 Route::post('/edit_personel', [PersonelController::class, 'edit_personel'])->name('edit-personel');
 Route::get('/delete_personel/{nrp}', [PersonelController::class, 'delete_personel'])->name('delete-personel');
 
+// Pejabat
+Route::get('/pejabat', [PejabatController::class, 'index'])->name('pejabat');
+Route::get('/get_pejabat', [PejabatController::class, 'get_pejabat_data'])->name('get-pejabat-data');
+Route::post('/add_pejabat', [PejabatController::class, 'add_pejabat'])->name('add-pejabat');
+Route::get('/delete_pejabat/{id}', [PejabatController::class, 'delete_pejabat'])->name('delete-pejabat');
