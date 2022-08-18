@@ -16,10 +16,7 @@ return new class extends Migration
         Schema::create('pangkat', function (Blueprint $table) {
             $table->increments('id_pangkat')->primary;
             $table->string('nama_pangkat', 30);
-        });
-        Schema::create('golongan', function (Blueprint $table) {
-            $table->increments('id_golongan')->primary;
-            $table->string('nama_golongan', 30);
+            $table->string('golongan', 30);
         });
         Schema::create('satker', function (Blueprint $table) {
             $table->increments('id_satker')->primary;

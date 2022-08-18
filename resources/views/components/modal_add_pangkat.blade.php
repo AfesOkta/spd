@@ -15,6 +15,10 @@
                 <label for="nama-pangkat">Nama Pangkat</label>
                 <input type="text" name="nama_pangkat"  class="form-control">
             </div>
+            <div class="form-group">
+                <label for="golongan-pangkat">Golongan Pangkat</label>
+                <input type="text" name="golongan"  class="form-control">
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

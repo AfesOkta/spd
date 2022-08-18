@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('personel', function (Blueprint $table) {
-            $table->string('nrp', 10)->primary();
-            $table->string('nama_personel', 50);
-            $table->string('jabatan', 50);
-            $table->string('id_pangkat', 10);  // fk
-            $table->string('id_satker', 10);   // fk
-            $table->string('id_status', 10);   // fk
+        Schema::create('pagu', function (Blueprint $table) {
+            $table->increments('id_pagu')->primary;
+            $table->string('akun', 10)->unique('kode_akun');
+            $table->integer('pagu',0,1);
+            $table->integer('realisasi',0,1);
+            $table->integer('sisa',0,1);
+            $table->text('ket')->nullable();
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personel');
+        Schema::dropIfExists('pagu');
     }
 };

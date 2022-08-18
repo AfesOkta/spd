@@ -13,7 +13,6 @@ class PersonelController extends Controller
 {
     public function personel(Request $request){
         $data['pangkat'] = Pangkat::get();
-        $data['golongan'] = Golongan::get();
         $data['satker'] = Satker::get();
         $data['status'] = Status::get();
         $data['personel'] = Personel::get();
@@ -28,8 +27,7 @@ class PersonelController extends Controller
         $valid_input = $request->validate([
             'nama_personel'=> 'required',  
             'jabatan'=> 'nullable',  
-            'id_pangkat'=> 'required',  
-            'id_golongan'=> 'required',  
+            'id_pangkat'=> 'required',
             'id_satker'=> 'required',  
             'id_status'=>'required'
         ]);

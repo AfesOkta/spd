@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PejabatController;
+use App\Http\Controllers\PaguController;
+use App\Http\Controllers\SpdController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,3 +55,15 @@ Route::get('/pejabat', [PejabatController::class, 'index'])->name('pejabat');
 Route::get('/get_pejabat', [PejabatController::class, 'get_pejabat_data'])->name('get-pejabat-data');
 Route::post('/add_pejabat', [PejabatController::class, 'add_pejabat'])->name('add-pejabat');
 Route::get('/delete_pejabat/{id}', [PejabatController::class, 'delete_pejabat'])->name('delete-pejabat');
+
+// Pagu
+Route::get('/pagu', [PaguController::class, 'index'])->name('pagu');
+Route::get('/get_pagu', [PaguController::class, 'get_pagu_data'])->name('get-pagu-data');
+Route::post('/add_pagu', [PaguController::class, 'add_pagu'])->name('add-pagu');
+Route::get('/delete_pagu/{id}', [PaguController::class, 'delete_pagu'])->name('delete-pagu');
+
+// SPD
+Route::get('/spd', [SpdController::class, 'index'])->name('spd');
+Route::get('/get_spd', [SpdController::class, 'get_spd_data'])->name('get-spd-data');
+Route::post('/add_spd', [SpdController::class, 'add_spd'])->name('add-spd');
+Route::get('/delete_spd/{id}', [SpdController::class, 'delete_spd'])->name('delete-spd');

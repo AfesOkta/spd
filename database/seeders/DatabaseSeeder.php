@@ -20,26 +20,16 @@ class DatabaseSeeder extends Seeder
 
         Pangkat::truncate();
   
-        $csvFile = fopen(base_path("database/data/pangkat.csv"), "r");
+        $csvFile = fopen(base_path("database/data/pangkat-gol.csv"), "r");
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             Pangkat::create([
                 "id_pangkat" => $data['0'],
-                "nama_pangkat" => $data['1']
+                "nama_pangkat" => $data['1'],
+                "golongan" => $data['2']
             ]);
         }
         fclose($csvFile);
 
-        // golongan
-        Golongan::truncate();
-  
-        $csvFile = fopen(base_path("database/data/gol.csv"), "r");
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
-            Golongan::create([
-                "id_golongan" => $data['0'],
-                "nama_golongan" => $data['1']
-            ]);
-        }
-        fclose($csvFile);
 
         // satker
         Satker::truncate();

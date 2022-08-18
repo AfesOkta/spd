@@ -29,29 +29,14 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="form-row">
-							<div class="col-md-6">
-								<label for="formPangkat" class="">Pangkat</label>
-								<div class="input-group mb-3">
-									<select name="id_pangkat" id="formPangkat" class="form-control">
-										<option value="pangkat">Pilih Pangkat</option>
-										@foreach ($pangkat as $row)
-										<option value="{{$row->id_pangkat}}">{{$row->nama_pangkat}}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<label for="formGolongan" class="">Golongan</label>
-								<div class="input-group mb-3">
-									<select name="id_golongan" id="formGolongan" class="form-control">
-										<option value="Golongan">Pilih Golongan</option>
-										@foreach ($golongan as $row)
-										<option value="{{$row->id_golongan}}">{{$row->nama_golongan}}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
+						<label for="formPangkat" class="">Pangkat | Golongan</label>
+						<div class="input-group mb-3">
+							<select name="id_pangkat" id="formPangkat" class="form-control">
+								<option value="pangkat">Pilih Pangkat</option>
+								@foreach ($pangkat as $row)
+								<option value="{{$row->id_pangkat}}">{{$row->nama_pangkat}} | {{$row->golongan}}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 				</div>
@@ -127,7 +112,7 @@
 						<td>{{$row->nrp}}</td>
 						<td>{{$row->nama_personel}}</td>
 						<td>{{$row->pangkat?$row->pangkat->nama_pangkat:''}}</td>
-						<td>{{$row->golongan?$row->golongan->nama_golongan:''}}</td>
+						<td>{{$row->pangkat?$row->pangkat->golongan:''}}</td>
 						<td>{{$row->jabatan}}</td>
 						<td>{{$row->satker?$row->satker->nama_satker:''}}</td>
 						<td>{{$row->status?$row->status->nama_status:''}}</td>

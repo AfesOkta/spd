@@ -9,9 +9,6 @@
             <li class="nav-item">
                 <a class="nav-link active" href="#" id="tab_pangkat" onclick="switch_tab('tab_pangkat')">Pangkat</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="tab_golongan" onclick="switch_tab('tab_golongan')">Golongan</a>
-            </li>
             <li class="nav-item ">
                 <a class="nav-link" href="#" id="tab_satker" onclick="switch_tab('tab_satker')">Satker</a>
             </li>
@@ -30,6 +27,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Pangkat</th>
+                        <th>Golongan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -41,10 +39,11 @@
                         <tr>
                             <td>{{$n++}}</td>
                             <td>{{$row->nama_pangkat}}</td>
+                            <td>{{$row->golongan}}</td>
                             <td>
                                 <button 
                                     class="btn btn-warning btn-sm" 
-                                    onclick="fill_edit_pangkat('{{$row->id_pangkat}}','{{$row->nama_pangkat}}')"
+                                    onclick="fill_edit_pangkat('{{$row->id_pangkat}}','{{$row->nama_pangkat}}','{{$row->golongan}}')"
                                     data-toggle="modal" data-target="#editPangkatModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -58,42 +57,6 @@
             </table>
         </div>
 
-<!-- ======================== Golongan ============================= -->
-		<div class="content" id="content-tab_golongan" style="display: none;">
-            <h3>Golongan</h3>
-            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addGolonganModal" data-toggle="modal">Tambah data</button>
-            <table class="table datatable">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Golongan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $n=1;
-                    @endphp
-                    @foreach ($golongan as $row)
-                        <tr>
-                            <td>{{$n++}}</td>
-                            <td>{{$row->nama_golongan}}</td>
-                            <td>
-                                <button 
-                                    class="btn btn-warning btn-sm" 
-                                    onclick="fill_edit_golongan('{{$row->id_golongan}}','{{$row->nama_golongan}}')"
-                                    data-toggle="modal" data-target="#editGolonganModal" >
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Golongan?')" href="{{route('delete-golongan',['id_golongan'=>$row->id_golongan])}}">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
 <!-- ======================== Satker ============================= -->
 		<div class="content" id="content-tab_satker" style="display: none;">
             <h3>Satker</h3>
@@ -173,9 +136,6 @@
 <x-modal_edit_pangkat />
 <x-modal_add_pangkat />
 
-<x-modal_edit_golongan />
-<x-modal_add_golongan />
-
 <x-modal_edit_satker />
 <x-modal_add_satker />
 
@@ -195,19 +155,14 @@ function switch_tab(tabId){
     $('#content-'+tabId).show();
 }
 
-function fill_edit_pangkat(id, nama)
+function fill_edit_pangkat(id, nama, golongan)
 {
     console.log({id:id, nama:nama})
     $('#form-pangkat-id').val(id);
     $('#form-pangkat-nama').val(nama);
+    $('#form-pangkat-golongan').val(golongan);
 }
 
-function fill_edit_golongan(id, nama)
-{
-    console.log({id:id, nama:nama})
-    $('#form-golongan-id').val(id);
-    $('#form-golongan-nama').val(nama);
-}
 
 function fill_edit_satker(id, nama)
 {

@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="@yield('pagu-menu')">
+                    <a href="{{route('pagu')}}" class="@yield('pagu-menu')">
                         <i class="metismenu-icon pe-7s-cash"></i>
                         Pagu
                     </a>
@@ -66,7 +66,7 @@
                 <!-- SPD -->
                 <li class="app-sidebar__heading">PROSES</li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('spd')}}">
                         <i class="metismenu-icon fa fa-thumbtack"></i>
                         SPD
                     </a>

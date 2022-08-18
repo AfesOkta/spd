@@ -16,6 +16,10 @@
                 <input type="text" name="nama_pangkat" id="form-pangkat-nama" class="form-control">
                 <input type="text" name="id_pangkat" id="form-pangkat-id" hidden>
             </div>
+            <div class="form-group">
+                <label for="golongan-pangkat">Golongan</label>
+                <input type="text" name="golongan" id="form-pangkat-golongan" class="form-control">
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

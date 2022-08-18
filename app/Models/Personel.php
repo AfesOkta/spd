@@ -16,9 +16,6 @@ class Personel extends Model
     public function pangkat(){
         return $this->hasOne(Pangkat::class, 'id_pangkat', 'id_pangkat');
     }
-    public function golongan(){
-        return $this->hasOne(Golongan::class, 'id_golongan', 'id_golongan');
-    }
     public function satker(){
         return $this->hasOne(Satker::class, 'id_satker', 'id_satker');
     }
