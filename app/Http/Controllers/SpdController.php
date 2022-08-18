@@ -8,9 +8,9 @@ class SpdController extends Controller
 {
     public function index(Request $request){
         $data = [
-            'pagu'=>Spd::get(),
+            'spd'=>Spd::get(),
         ];
-        return view('pagu', $data);
+        return view('spd', $data);
     }
     public function get_pagu_data(Request $request){
         $akun = $request->input('akun');

@@ -23,7 +23,7 @@
 						<label for="formAkun" class="">Akun</label>
 						<div class="input-group mb-3">
 							<input name="akun" id="formAkun"  type="text" class="form-control" value="{{old('akun')}}" required autocomplete="off">
-							<input name="id_pagu" id="formId" type="number"  value="{{old('id_akun')}}" hidden>
+							<input name="id_pagu" id="formId" type="number"  value="{{old('id_pagu')}}" hidden>
 							<div class="input-group-append">
 								<button id="btn-search" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
 							</div>
