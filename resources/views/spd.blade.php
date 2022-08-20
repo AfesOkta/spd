@@ -2,6 +2,7 @@
 @section('page-title', 'SPD')
 @section('page-title-desc', 'Data SPD')
 @section('spd-menu', 'mm-active')
+
 @section('content')
 <div class="card col-12 mb-3">
 	<div class="card-header">
@@ -10,7 +11,7 @@
 	</div>
 	<div class="card-body collapse " id="form-section">
 		<div class="card-body">
-			<h5 class="card-title">Tambah SPD</h5>
+			<h6 class="card-title">Tambah SPD</h6>
 			@if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>
@@ -24,12 +25,12 @@
 				@csrf
 				<div id="accordion">
 					<div class="card">
-						<div class="card-header bg-primary" id="headingOne">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						<div class="card-header bg-secondary p-0" id="headingOne" style="height: 35px;" >
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 									SPD
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -63,8 +64,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="formJenisSpd">Jenis SPD</label>
-											<select type="text" id="formJenisSpd" class="form-control" name="jenis_spd">
-												<option value="">---</option>
+											<select type="text" id="formJenisSpd" class="form-control" name="jenis_spd" onchange="toggle_pengikut()">
+												<option value="Rutin">Rutin</option>  <!-- tanpa pengikut -->
+												<option value="Dalam Kota">Dalam Kota</option>
+												<option value="PNBP">PNBP</option>
+												<option value="Dukops">Dukops</option>
+												<option value="Dikbangpes">Dikbangpes</option>
+												<option value="Luar Negeri">Luar Negeri</option> <!-- tanpa pengikut -->
 											</select>
 										</div>
 									</div>
@@ -73,12 +79,12 @@
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-primary" id="headingAnggota">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseAnggota" aria-expanded="true" aria-controls="collapseAnggota">
+						<div class="card-header bg-secondary p-0" id="headingAnggota" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseAnggota" aria-expanded="true" aria-controls="collapseAnggota">
 									Anggota
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseAnggota" class="collapse" aria-labelledby="headingAnggota" data-parent="#accordion">
@@ -89,12 +95,18 @@
 										<div class="input-group">
 											<input type="number" class="form-control">
 											<div class="input-group-append">
-												<button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+												<button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+												<button
+												type="button" 
+												class="btn btn-secondary" data-target="#modal-search-anggota" data-toggle="modal">
+													<i class="fa fa-user-plus"></i>
+												</button>
 											</div>
 										</div>
 									</div>
 									<div class="col-12">
-										<table class="table">
+										<div class="table-responsive">
+										<table class="table" style="width: 100%;">
 											<tr>
 												<th>Nama</th>
 												<th>Pangkat</th>
@@ -112,6 +124,7 @@
 												<td>Satker</td>
 											</tr>
 										</table>
+										</div>
 									</div>
 								</div>
 								<hr>
@@ -119,12 +132,12 @@
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-primary" id="headingKeterangan">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseKeterangan" aria-expanded="true" aria-controls="collapseKeterangan">
+						<div class="card-header bg-secondary p-0" id="headingKeterangan" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseKeterangan" aria-expanded="true" aria-controls="collapseKeterangan">
 									Keterangan
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseKeterangan" class="collapse" aria-labelledby="headingKeterangan" data-parent="#accordion">
@@ -156,12 +169,12 @@
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-primary" id="headingWaktu">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseWaktu" aria-expanded="true" aria-controls="collapseWaktu">
+						<div class="card-header bg-secondary p-0" id="headingWaktu" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseWaktu" aria-expanded="true" aria-controls="collapseWaktu">
 									Waktu
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseWaktu" class="collapse" aria-labelledby="headingWaktu" data-parent="#accordion">
@@ -191,12 +204,12 @@
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-primary" id="headingSprin">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseSprin" aria-expanded="true" aria-controls="collapseSprin">
+						<div class="card-header bg-secondary p-0" id="headingSprin" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseSprin" aria-expanded="true" aria-controls="collapseSprin">
 									Sprin
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseSprin" class="collapse" aria-labelledby="headingSprin" data-parent="#accordion">
@@ -223,38 +236,64 @@
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-primary" id="headingKeuangan">
-							<h5 class="mb-0">
-								<button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseKeuangan" aria-expanded="true" aria-controls="collapseKeuangan">
+						<div class="card-header bg-secondary p-0" id="headingKeuangan" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapseKeuangan" aria-expanded="true" aria-controls="collapseKeuangan">
 									Keuangan
 								</button>
-							</h5>
+							</h6>
 						</div>
 
 						<div id="collapseKeuangan" class="collapse" aria-labelledby="headingKeuangan" data-parent="#accordion">
 							<div class="card-body">
 								
-				<div class="form-row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="formMataAnggaran">Mata Anggaran</label>
-							<div class="input-group">
-								<select name="mata_anggaran" id="formMataAnggarab" class="form-control">
-									<option value=""> -------- ---</option>
-								</select>
-								<div class="input-group-append">
-									<input type="text" id="formket" class="form-control" value="" readonly>
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="formMataAnggaran">Mata Anggaran</label>
+											<div class="input-group">
+												<select name="mata_anggaran" id="formMataAnggarab" class="form-control">
+													<option value=""> -------- ---</option>
+												</select>
+												<div class="input-group-append">
+													<input type="text" id="formket" class="form-control" value="" readonly>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="formJenisPengeluaran">Jenis Pengeluaran</label>
+											<input type="text" id="formJenisPengeluaran" class="form-control" value="" required>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="formJenisPengeluaran">Jenis Pengeluaran</label>
-							<input type="text" id="formJenisPengeluaran" class="form-control" value="" required>
+					<div class="card" id="formPengikut" style="display: none;">
+						<div class="card-header bg-secondary p-0" id="headingPengikut" style="height: 35px;">
+							<h6 class="mb-0">
+								<button type="button" class="btn btn-sm btn-link text-white" data-toggle="collapse" data-target="#collapsePengikut" aria-expanded="true" aria-controls="collapsePengikut">
+									Pengikut
+								</button>
+							</h6>
 						</div>
-					</div>
-				</div>
+
+						<div id="collapsePengikut" class="collapse" aria-labelledby="headingPengikut" data-parent="#accordion">
+							<div class="card-body">
+								<button class="btn btn-info btn-sm mb-2 float-right">Tambah</button>
+								<table class="table table-hover" style="width: 100%;">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Nama</th>
+											<th>NRP</th>
+											<th>Pangkat/Golongan</th>
+											<th>Lama</th>
+										</tr>
+									</thead>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -266,42 +305,82 @@
 </div>
 <div class="card col-12">
 	<div class="card-header">
-		<h4>Data Pejabat</h4>
+		<h4>Data SPD</h4>
 	</div>
 	<div class="card-body">
-		<table class="mb-0 table table-hover datatable" >
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Akun</th>
-					<th>Pagu</th>
-					<th>Realisasi</th>
-					<th>Sisa</th>
-					<th>Keterangan</th>
-					<th>Aksi</th>
-				</tr>
-			</thead>
-			<tbody>
-				@php
-					$n=1;
-				@endphp
-				@foreach ($spd as $row)
+		<div class="table-responsive">
+			<table class="mb-0 table table-hover datatable " >
+				<thead>
 					<tr>
-						<th scope="row">{{$n++}}</th>
-						<td>
-                            
-							<button 
-								onclick="fill_edit('{{$row->nrp}}')"
-                                class="btn btn-sm btn-warning" ><i class="fa fa-edit"></i></button>
-						</td>
+						<th>#</th>
+						<th>Akun</th>
+						<th>Pagu</th>
+						<th>Realisasi</th>
+						<th>Sisa</th>
+						<th>Keterangan</th>
+						<th>Aksi</th>
 					</tr>
-				@endforeach
-			</tbody>
-		</table>
+				</thead>
+			</table>
+		</div>
 	</div>
 </div>
-@endsection
 
+
+@endsection
+@section('extra-modal')
+<!-- Modal -->
+<div class="modal fade" id="modal-search-anggota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="exampleModalLabel">Tambah Satker</h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+      	<div class="modal-body">
+				<div class="table-responsive">
+				<table class="table table-bordered table-hover datatable-search-anggota">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nama</th>
+							<th>NRP/Pangkat</th>
+							<th>Satker</th>
+							<th>Add</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for ($i=0; $i<100; $i++)
+							
+						@php
+						$n=1;
+						@endphp
+						@foreach ($personel as $anggota)
+						<tr>
+							<td>{{$n++}}</td>
+							<td>{{$anggota->nama_personel}}</td>
+							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
+							<td>{{$anggota->satker->nama_satker}}</td>
+							<td>
+								<button class="btn btn-primary btn-xs" data-dismiss="modal" wire:click="addAnggota('{{$anggota->nrp}}')">+</button>
+							</td>
+						</tr>
+						@endforeach
+						@endfor
+					</tbody>
+				</table>
+				</div>
+    	</div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+  </div>
+</div>
+@endsection
 @section('extra-js')
 
 <script>
@@ -310,11 +389,6 @@
 		// do ajax request
 		$.get('{{route('get-pagu-data')}}', {akun:akun}, function(data){
 
-			$('#formId').val(data.id_pagu);
-			$('#formPagu').val(parseInt(data.pagu));
-			$('#formRealisasi').val(parseInt(data.realisasi));
-			$('#formSisa').val(parseInt(data.sisa));
-			$('#formKet').val(data.ket);
             console.log(data)
 		});
 	});
@@ -328,5 +402,17 @@
         $('#btn-search').click();
         $('#formAkun').focus()
     }
+
+	function addAnggota(nrp){
+		$('#formNrp').val(nrp);
+	}
+	function toggle_pengikut(){
+		let selected_val = $('#formJenisSpd').val();
+		if(selected_val == 'Rutin' || selected_val == 'Luar Negeri'){
+			$('#formPengikut').hide();
+		}else{
+			$('#formPengikut').show();
+		}
+	}
 </script>
 @endsection

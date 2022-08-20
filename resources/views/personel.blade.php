@@ -87,8 +87,8 @@
 	<div class="card-header">
 		<h4>Data Personel</h4>
 	</div>
-	<div class="card-body">
-		<table class="mb-0 table table-hover table-responsive datatable">
+	<div class="card-body table-responsive">
+		<table class="mb-0 table table-hover  datatable">
 			<thead>
 				<tr>
 					<th>#</th>

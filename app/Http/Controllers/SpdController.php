@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Spd;
+use App\Models\Personel;
 class SpdController extends Controller
 {
     public function index(Request $request){
         $data = [
             'spd'=>Spd::get(),
+            'personel'=>Personel::get(),
         ];
         return view('spd', $data);
     }

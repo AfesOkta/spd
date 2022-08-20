@@ -22,6 +22,7 @@
 		<div class="content" id="content-tab_pangkat">
             <h3>Pangkat</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addPangkatModal" data-toggle="modal">Tambah data</button>
+            <div class="table-responsive">
             <table class="table datatable">
                 <thead>
                     <tr>
@@ -55,17 +56,18 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
 
 <!-- ======================== Satker ============================= -->
 		<div class="content" id="content-tab_satker" style="display: none;">
             <h3>Satker</h3>
             <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addSatkerModal" data-toggle="modal">Tambah data</button>
-            <table class="table datatable">
+            <table class="table datatable-search-anggota">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Satker</th>
+                        <th nowrap>Nama Satker</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -101,7 +103,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Status</th>
+                        <th nowrap>Nama Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

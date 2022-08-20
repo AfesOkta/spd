@@ -65,7 +65,7 @@
 </div>
 <div class="card col-12">
 	<div class="card-header">
-		<h4>Data Pejabat</h4>
+		<h4>Data Pagu</h4>
 	</div>
 	<div class="card-body">
 		<table class="mb-0 table table-hover datatable" >
