@@ -23,7 +23,7 @@
 					</ul>
 				</div>
 			@endif
-			<form action="{{route('add-spd')}}" method="POST"> 
+			<form action="{{route('add-spd')}}" method="POST" class="need-validation"> 
 				@csrf
 				<div id="accordion">
 					<div class="card">
@@ -44,9 +44,9 @@
 										<div class="input-group mb-3">
 											
 											<div class="input-group-prepend">
-												<button type="button" class="btn btn-default" disabled> <span id="nmrSpd">SPD /</span> </button>
+												<button type="button" class="btn btn-default" disabled><span id="nmrSpd">SPD/</span></button>
 											</div>
-											<input name="nomor_spd" id="formSpd"  type="text" class="form-control col-2" value="{{old('nomor_spd')}}" required autocomplete="off">
+											<input name="no_spd" id="formSpd"  type="text" class="form-control col-2" value="{{old('no_spd')?old('no_spd'):$next_no_spd}}" required autocomplete="off">
 											<input name="id_spd" id="formId" type="number"  value="{{old('id_spd')}}" hidden>
 											<div class="input-group-append btn-group">
 												<button type="button" class="btn btn-default" disabled>/{{$m[date('m')]}}/TUK.2.1/{{date('Y')}}</button>
@@ -96,7 +96,7 @@
 									<div class="col-6 form-group">
 										<label for="formNrp">NRP</label>
 										<div class="input-group">
-											<input type="number" class="form-control" id="formNRP">
+											<input type="number" name="nrp" class="form-control" id="formNRP" value="{{old('nrp')}}">
 											<div class="input-group-append" >
 												<button type="button" 
 												id="btn-search-anggota"
@@ -115,7 +115,7 @@
 											<thead>
 												<tr>
 													<th>Nama</th>
-													<th>Pangkat</th>
+													<th>Pangkat/NRP</th>
 													<th>Golongan</th>
 													<th>Status</th>
 													<th>Jabatan</th>
@@ -162,7 +162,10 @@
 										<div class="form-group">
 											<label for="formTujuan">Tujuan SPD</label>
 											<select name="tujuan_spd" id="formTujuan" class="form-control">
-												<option value="">---</option>
+												<option value="" selected disabled>--Pilih Tujuan--</option>
+												@foreach ($tujuan as $row)
+													<option value="{{$row->id_tujuan}}">{{$row->nama_tujuan}}</option>											
+												@endforeach
 											</select>
 										</div>
 									</div>
@@ -186,19 +189,19 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label for="formLamaHari">Lama (Hari)</label>
-											<input type="text" id="formLamaHari" name="tanggal_berangkat" class="form-control" value="" required readonly>
+											<input type="text" id="formLamaHari" class="form-control"  readonly>
 										</div>
 									</div>
 									<div class="col-md-5">
 										<div class="form-group">
 											<label for="formBerangkat">Berangkat</label>
-											<input type="text" id="formBerangkat" name="tanggal_berangkat" class="form-control" value="" required>
+											<input type="text" onchange="calculate_day()" id="formBerangkat" name="tanggal_berangkat" class="form-control datepicker-int"  required>
 										</div>
 									</div>
 									<div class="col-md-5">
 										<div class="form-group">
 											<label for="formKembali">Kembali</label>
-											<input type="text" id="formKembali" name="tanggal_kembali" class="form-control" value="" required>
+											<input type="text" onchange="calculate_day()" id="formKembali" name="tanggal_kembali" class="form-control datepicker-int"  required>
 										</div>
 									</div>
 								</div>
@@ -228,7 +231,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="formTglSprin">Tanggal Sprin</label>
-											<input type="text" id="formTglSprin" name="tanggal_sprin" class="form-control" value="" required>
+											<input type="text" id="formTglSprin" name="tanggal_sprin" class="form-control datepicker" value="" required>
 										</div>
 									</div>
 								</div>
@@ -248,23 +251,26 @@
 							<div class="card-body">
 								
 								<div class="form-row">
-									<div class="col-md-6">
+									<div class="col-md-8">
 										<div class="form-group">
 											<label for="formMataAnggaran">Mata Anggaran</label>
 											<div class="input-group">
-												<select name="mata_anggaran" id="formMataAnggarab" class="form-control">
-													<option value=""> -------- ---</option>
+												<select name="mata_anggaran" id="formMataAnggaran" class="form-control" onchange="replace_ket_mata_anggaran()">
+													<option selected disabled>--Pilih Mata Anggaran --</option>
+													@foreach ($pagu as $row)
+														<option value="{{$row->id_pagu}}">{{$row->akun}}</option>
+													@endforeach
 												</select>
 												<div class="input-group-append">
-													<input type="text" id="formket" class="form-control" value="" readonly>
+													<input type="text" id="formKetMataAnggaran" class="form-control" value="" readonly>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="formJenisPengeluaran">Jenis Pengeluaran</label>
-											<input type="text" id="formJenisPengeluaran" class="form-control" value="" required>
+											<input type="text" name="jenis_pengeluaran" id="formJenisPengeluaran" class="form-control" value="" required>
 										</div>
 									</div>
 								</div>
@@ -309,18 +315,70 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="mb-0 table table-hover datatable " >
+			<table class="mb-0 table table-hover table-bordered datatable " >
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Akun</th>
-						<th>Pagu</th>
-						<th>Realisasi</th>
-						<th>Sisa</th>
+						<th>SPD</th>
+						<th>Anggota</th>
 						<th>Keterangan</th>
+						<th>Waktu</th>
+						<th>Pengikut</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
+				<tbody>
+					@php
+						$n=1;
+					@endphp
+					@foreach ($spd as $row )
+						<tr>
+							<td>
+								{{$n++}}
+							</td>
+							<td>
+								<b>{{$row->no_spd}}</b><br>
+								Tanggal: {{$row->tanggal_spd}} <br>
+								Jenis: {{$row->jenis_spd}}
+							</td>
+							<td>
+								<b>{{$row->personel->nama_personel}}</b><br>
+								NRP: {{$row->nrp}} <br>
+								Pangkat/Golongan: {{$row->personel->pangkat->nama_pangkat}} / {{$row->personel->pangkat->golongan}}
+							</td>
+							<td>
+								{{$row->jenis_pengeluaran}} / 
+								{{$row->keperluan}}
+							</td>
+							<td>
+								@php
+								$earlier = new DateTime($row->tanggal_berangkat);
+								$later = new DateTime($row->tanggal_kembali);
+
+								$abs_diff = $later->diff($earlier)->format("%a"); //3
+								@endphp
+								{{$row->tanggal_berangkat}} - {{$row->tanggal_kembali}} / <br>
+								{{$abs_diff+1}} Hari
+							</td>
+							<td class="text-center">
+								<button class="btn btn-sm btn-info mx-auto">
+									<i class="fa fa-users"></i> 0
+								</button>
+							</td>
+							<td nowrap>
+								<button class="btn btn-sm btn-info m-1">
+									<i class="fa fa-eye"></i>
+								</button>
+								<button class="btn btn-sm btn-warning m-1">
+									<i class="fa fa-edit"></i>
+								</button>
+								<button class="btn btn-sm btn-danger m-1">
+									<i class="fa fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -379,15 +437,17 @@
 </div>
 @endsection
 @section('extra-js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 <script>
+
 	function searchAnggota(){
 		nrp = $('#formNRP').val();
 		// do ajax request
 		$.get("{{route('get-personel-data')}}", {nrp:nrp}, function(data){
 			data = JSON.parse(data)
-			console.log(data.pangkat);
-			dataAnggota = "<tr><td>"+data.nama_personel+"</td><td>"+data.nrp+"/"+data.pangkat.nama_pangkat+"</td><td>"+data.status.nama_status+"</td><td>"+data.pangkat.golongan+"</td><td>"+data.jabatan+"</td><td>"+data.satker.nama_satker+"</td></tr>";
+			console.log(data);
+			dataAnggota = "<tr><td>"+data.nama_personel+"</td><td>"+data.pangkat.nama_pangkat+"/"+data.nrp+"</td><td>"+data.pangkat.golongan+"</td><td>"+data.status.nama_status+"</td><td>"+data.jabatan+"</td><td>"+data.satker.nama_satker+"</td></tr>";
 			$('#dataAnggota').html(dataAnggota)
 		});
 	}
@@ -421,6 +481,25 @@
 		}
 	}
 
+	function calculate_day(){
+		let start = $('#formBerangkat').val();
+		let end = $('#formKembali').val();
+		let start_date = new Date(start);
+		// console.log(start_date)
+		let end_date = new Date(end);
+		let diff = end_date - start_date;
+		let days = diff / (1000 * 60 * 60 * 24);
+		$('#formLamaHari').val(days+1);
+	}
 
+	function replace_ket_mata_anggaran(){
+		var id_pagu = $('#formMataAnggaran').val();
+		$.get("{{route('get-pagu-data-by-id')}}", {id_pagu:id_pagu}, function(data){
+			jenises = data.ket.split(' ')
+			jenis = jenises[0]+' '+jenises[1]
+			$('#formJenisPengeluaran').val(jenis)
+			$('#formKetMataAnggaran').val(data.ket);
+		});
+	}
 </script>
 @endsection

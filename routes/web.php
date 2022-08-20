@@ -64,6 +64,7 @@ Route::get('/delete_pejabat/{id}', [PejabatController::class, 'delete_pejabat'])
 // Pagu
 Route::get('/pagu', [PaguController::class, 'index'])->name('pagu');
 Route::get('/get_pagu', [PaguController::class, 'get_pagu_data'])->name('get-pagu-data');
+Route::get('/get_pagu_by_id', [PaguController::class, 'get_pagu_data_by_id'])->name('get-pagu-data-by-id');
 Route::post('/add_pagu', [PaguController::class, 'add_pagu'])->name('add-pagu');
 Route::get('/delete_pagu/{id}', [PaguController::class, 'delete_pagu'])->name('delete-pagu');
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('tujuan_spd', '155');
             $table->string('tanggal_berangkat', '20');
             $table->string('tanggal_kembali', '20');
-            $table->string('no_sprin', '20');
+            $table->string('no_sprin', '155');
             $table->string('tanggal_sprin', '20');
             $table->string('mata_anggaran', '20');
             $table->string('jenis_pengeluaran', '20');

@@ -73,7 +73,11 @@
         dateFormat: 'dd MM yy',
         monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
 
-    }).datepicker('setDate', 'now')
+    }).datepicker('setDate', 'now') 
+    
+    $('.datepicker-int').datepicker({
+        dateFormat: 'dd MM yy',
+    })
     @if(session('msg-success'))
     // Display a success toast, with a title
     toastr.success('Success', '{{session('msg-success')}}')

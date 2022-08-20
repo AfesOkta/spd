@@ -17,6 +17,11 @@ class PaguController extends Controller
         $data = Pagu::where('akun',$akun)->get()[0];
         if($data->count()>0) return response()->json($data);
     }
+    public function get_pagu_data_by_id(Request $request){
+        $id_pagu = $request->input('id_pagu');
+        $data = Pagu::find($id_pagu);
+        if($data->count()>0) return response()->json($data);
+    }
 
     public function add_pagu(Request $request){
         $valid_input = $request->validate([

@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         fclose($csvFile);
         
         // Tujuan
-        Status::truncate();
+        Tujuan::truncate();
   
         $csvFile = fopen(base_path("database/data/tujuan.csv"), "r");
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {

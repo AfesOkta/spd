@@ -10,6 +10,7 @@ class Spd extends Model
     use HasFactory;
     protected $fillable = [
         'id_spd',
+        'no_spd',
         'tanggal_spd',
         'jenis_spd',
         'nrp',
@@ -26,4 +27,8 @@ class Spd extends Model
     public $table = 'spd';
     protected $primaryKey = 'id_spd';
     public $timestamps = false;
+
+    public function personel(){
+        return $this->hasOne(Personel::class, 'nrp', 'nrp');
+    }
 }
