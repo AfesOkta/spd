@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Pangkat;
 use App\Models\Satker;
 use App\Models\Status;
+use App\Models\Tujuan;
 class MasterController extends Controller
 {
     public function index(Request $request){
         $data['pangkat'] = Pangkat::get();
         $data['satker'] = Satker::get();
         $data['status'] = Status::get();
+        $data['tujuan'] = Tujuan::get();
         return view('master', $data);
     }
 
@@ -75,4 +77,26 @@ public function delete_status(Request $request){
     $status = Status::where('id_status',$request->input('id_status'))->delete();
     return redirect()->route('master')->with('tab', 'status');
 }
+// Tujuan
+public function edit_tujuan(Request $request){
+    $tujuan = Tujuan::find($request->input('id_tujuan'));
+    $tujuan->nama_tujuan  = $request->input('nama_tujuan');
+    $tujuan->uang_harian      = $request->input('uang_harian');
+    $tujuan->save();
+    return redirect()->route('master')->with('tab', 'tujuan');
+}
+public function add_tujuan(Request $request){
+    $tujuan = Tujuan::insert([
+        'id_tujuan'=>$request->input('id_tujuan'),
+        'nama_tujuan'=>$request->input('nama_tujuan'),
+        'uang_harian'=>$request->input('uang_harian')
+    ]);
+    return redirect()->route('master')->with('tab', 'tujuan');
+}
+
+public function delete_tujuan(Request $request){
+    $tujuan = Tujuan::where('id_tujuan',$request->input('id_tujuan'))->delete();
+    return redirect()->route('master')->with('tab', 'tujuan');
+}
+
 }

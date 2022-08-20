@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" id="tab_status" onclick="switch_tab('tab_status')">Status</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="tab_tujuan" onclick="switch_tab('tab_tujuan')">Tujuan Perjalanan</a>
+            </li>
         </ul>
 	</div>
 	<div class="card-body">
@@ -96,14 +99,16 @@
             </table>
         </div>
 <!-- ======================== Status ============================= -->
-		<div class="content" id="content-tab_status" style="display: none;">
-            <h3>Status</h3>
-            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addStatusModal" data-toggle="modal">Tambah data</button>
+<!-- ======================== Tujuan Perjalanan ============================= -->
+		<div class="content" id="content-tab_tujuan" style="display: none;">
+            <h3>Tujuan Perjalanan</h3>
+            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addTujuanModal" data-toggle="modal">Tambah data</button>
             <table class="table datatable">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th nowrap>Nama Status</th>
+                        <th nowrap>Nama Kota</th>
+                        <th nowrap>Uang Harian</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -111,18 +116,19 @@
                     @php
                         $n=1;
                     @endphp
-                    @foreach ($status as $row)
+                    @foreach ($tujuan as $row)
                         <tr>
                             <td>{{$n++}}</td>
-                            <td>{{$row->nama_status}}</td>
+                            <td>{{$row->nama_tujuan}}</td>
+                            <td>Rp. {{number_format($row->uang_harian,0,',','.')}},-</td>
                             <td>
                                 <button 
                                     class="btn btn-warning btn-sm" 
-                                    onclick="fill_edit_status('{{$row->id_status}}','{{$row->nama_status}}')"
-                                    data-toggle="modal" data-target="#editStatusModal" >
+                                    onclick="fill_edit_tujuan('{{$row->id_tujuan}}','{{$row->nama_tujuan}}','{{$row->uang_harian}}')"
+                                    data-toggle="modal" data-target="#editTujuanModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Status?')" href="{{route('delete-status',['id_status'=>$row->id_status])}}">
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Tujuan?')" href="{{route('delete-tujuan',['id_tujuan'=>$row->id_tujuan])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -143,6 +149,9 @@
 
 <x-modal_edit_status />
 <x-modal_add_status />
+
+<x-modal_edit_tujuan />
+<x-modal_add_tujuan />
 @endsection
 
 @section('extra-js')
@@ -178,6 +187,14 @@ function fill_edit_status(id, nama)
     console.log({id:id, nama:nama})
     $('#form-status-id').val(id);
     $('#form-status-nama').val(nama);
+}
+
+function fill_edit_tujuan(id, nama, uang)
+{
+    
+    $('#form-tujuan-id').val(id);
+    $('#form-tujuan-nama').val(nama);
+    $('#form-tujuan-uang_harian').val(uang);
 }
 </script>
 

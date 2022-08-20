@@ -21,7 +21,11 @@ class PersonelController extends Controller
     public function get_personel_data(Request $request){
         $nrp = $request->input('nrp');
         $data = Personel::find($nrp);
-        if($data->count()>0) return response()->json($data);
+        $res = $data;
+        $res->pangkat = $data->pangkat;
+        $res->satker = $data->satker;
+        $res->status = $data->status;
+        return response()->json($res->toJson());
     }
     public function add_personel(Request $request){
         $valid_input = $request->validate([

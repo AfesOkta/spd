@@ -44,6 +44,11 @@ Route::post('/add_status', [MasterController::class, 'add_status'])->name('add-s
 Route::post('/edit_status', [MasterController::class, 'edit_status'])->name('edit-status');
 Route::get('/delete_status', [MasterController::class, 'delete_status'])->name('delete-status');
 
+// Tujuan
+Route::post('/add_tujuan', [MasterController::class, 'add_tujuan'])->name('add-tujuan');
+Route::post('/edit_tujuan', [MasterController::class, 'edit_tujuan'])->name('edit-tujuan');
+Route::get('/delete_tujuan', [MasterController::class, 'delete_tujuan'])->name('delete-tujuan');
+
 // Personel
 Route::get('/get_personel_data', [PersonelController::class, 'get_personel_data'])->name('get-personel-data');
 Route::post('/add_personel', [PersonelController::class, 'add_personel'])->name('add-personel');
@@ -67,3 +72,4 @@ Route::get('/spd', [SpdController::class, 'index'])->name('spd');
 Route::get('/get_spd', [SpdController::class, 'get_spd_data'])->name('get-spd-data');
 Route::post('/add_spd', [SpdController::class, 'add_spd'])->name('add-spd');
 Route::get('/delete_spd/{id}', [SpdController::class, 'delete_spd'])->name('delete-spd');
+

@@ -5,9 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Pangkat;
-use App\Models\Golongan;
 use App\Models\Satker;
 use App\Models\Status;
+use App\Models\Tujuan;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -51,6 +51,19 @@ class DatabaseSeeder extends Seeder
             Status::create([
                 "id_status" => $data['0'],
                 "nama_status" => $data['1']
+            ]);
+        }
+        fclose($csvFile);
+        
+        // Tujuan
+        Status::truncate();
+  
+        $csvFile = fopen(base_path("database/data/tujuan.csv"), "r");
+        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+            Tujuan::create([
+                "id_tujuan" => $data['0'],
+                "nama_tujuan" => $data['1'],
+                "uang_harian" => $data['2']
             ]);
         }
         fclose($csvFile);

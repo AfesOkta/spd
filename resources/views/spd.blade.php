@@ -2,7 +2,9 @@
 @section('page-title', 'SPD')
 @section('page-title-desc', 'Data SPD')
 @section('spd-menu', 'mm-active')
-
+@php
+	$m = ['01'=>'I','02'=>'II', '03'=>'III', '04'=>'IV', '05'=>'V', '06'=>'VI', '07'=>'VII', '08'=>'VIII', '09'=>'IX', '10'=>'X', '11'=>'XI', '12'=>'XII',];
+@endphp
 @section('content')
 <div class="card col-12 mb-3">
 	<div class="card-header">
@@ -42,11 +44,12 @@
 										<div class="input-group mb-3">
 											
 											<div class="input-group-prepend">
-												<button class="btn btn-default" disabled>SPD / </button>
+												<button type="button" class="btn btn-default" disabled> <span id="nmrSpd">SPD /</span> </button>
 											</div>
-											<input name="nomor_spd" id="formSpd"  type="text" class="form-control" value="{{old('nomor_spd')}}" required autocomplete="off">
+											<input name="nomor_spd" id="formSpd"  type="text" class="form-control col-2" value="{{old('nomor_spd')}}" required autocomplete="off">
 											<input name="id_spd" id="formId" type="number"  value="{{old('id_spd')}}" hidden>
 											<div class="input-group-append btn-group">
+												<button type="button" class="btn btn-default" disabled>/{{$m[date('m')]}}/TUK.2.1/{{date('Y')}}</button>
 												<button id="btn-search" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
 												<button id="btn-print" type="button" class="btn btn-info"><i class="fa fa-print"></i></button>
 											</div>
@@ -93,13 +96,15 @@
 									<div class="col-6 form-group">
 										<label for="formNrp">NRP</label>
 										<div class="input-group">
-											<input type="number" class="form-control">
-											<div class="input-group-append">
-												<button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+											<input type="number" class="form-control" id="formNRP">
+											<div class="input-group-append" >
+												<button type="button" 
+												id="btn-search-anggota"
+												class="btn btn-secondary" onclick="searchAnggota()"><i class="fa fa-search" ></i></button>
 												<button
 												type="button" 
 												class="btn btn-secondary" data-target="#modal-search-anggota" data-toggle="modal">
-													<i class="fa fa-user-plus"></i>
+													<i class="fa fa-book"></i>
 												</button>
 											</div>
 										</div>
@@ -107,22 +112,19 @@
 									<div class="col-12">
 										<div class="table-responsive">
 										<table class="table" style="width: 100%;">
-											<tr>
-												<th>Nama</th>
-												<th>Pangkat</th>
-												<th>Golongan</th>
-												<th>Status</th>
-												<th>Jabatan</th>
-												<th>Satker</th>
-											</tr>
-											<tr>
-												<td>Nama</td>
-												<td>Pangkat</td>
-												<td>Golongan</td>
-												<td>Status</td>
-												<td>Jabatan</td>
-												<td>Satker</td>
-											</tr>
+											<thead>
+												<tr>
+													<th>Nama</th>
+													<th>Pangkat</th>
+													<th>Golongan</th>
+													<th>Status</th>
+													<th>Jabatan</th>
+													<th>Satker</th>
+												</tr>
+											</thead>
+											<tbody id="dataAnggota">
+
+											</tbody>
 										</table>
 										</div>
 									</div>
@@ -144,7 +146,7 @@
 							<div class="card-body">
 								
 								<div class="form-row">
-									<div class="col-md-7">
+									<div class="col-md-12 mb-2">
 										<label for="formKeperluan">Keperluan</label>
 										<textarea name="keperluan" id="formKeperluan" class="form-control"></textarea>
 									</div>
@@ -219,9 +221,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="formSprin">Nomor Sprin</label>
-											@php
-												$m = ['01'=>'I','02'=>'II', '03'=>'III', '04'=>'IV', '05'=>'V', '06'=>'VI', '07'=>'VII', '08'=>'VIII', '09'=>'IX', '10'=>'X', '11'=>'XI', '12'=>'XII',];
-											@endphp
+											
 											<input type="text" id="formSprin" name="no_sprin" class="form-control" value="Sprin/    /{{$m[date('m')]}}/DIK.2.3./{{date('Y')}}" required>
 										</div>
 									</div>
@@ -352,8 +352,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						@for ($i=0; $i<100; $i++)
-							
 						@php
 						$n=1;
 						@endphp
@@ -364,11 +362,10 @@
 							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
 							<td>{{$anggota->satker->nama_satker}}</td>
 							<td>
-								<button class="btn btn-primary btn-xs" data-dismiss="modal" wire:click="addAnggota('{{$anggota->nrp}}')">+</button>
+								<button class="btn btn-primary btn-xs" data-dismiss="modal" onclick="addAnggota('{{$anggota->nrp}}')"><i class="fa fa-user-plus"></i></button>
 							</td>
 						</tr>
 						@endforeach
-						@endfor
 					</tbody>
 				</table>
 				</div>
@@ -384,14 +381,16 @@
 @section('extra-js')
 
 <script>
-	$('#btn-search').click(function(){
-		akun = $('#formAkun').val();
+	function searchAnggota(){
+		nrp = $('#formNRP').val();
 		// do ajax request
-		$.get('{{route('get-pagu-data')}}', {akun:akun}, function(data){
-
-            console.log(data)
+		$.get("{{route('get-personel-data')}}", {nrp:nrp}, function(data){
+			data = JSON.parse(data)
+			console.log(data.pangkat);
+			dataAnggota = "<tr><td>"+data.nama_personel+"</td><td>"+data.nrp+"/"+data.pangkat.nama_pangkat+"</td><td>"+data.status.nama_status+"</td><td>"+data.pangkat.golongan+"</td><td>"+data.jabatan+"</td><td>"+data.satker.nama_satker+"</td></tr>";
+			$('#dataAnggota').html(dataAnggota)
 		});
-	});
+	}
 	function toggle_button_add(btn){
 		$('.btn-add').hide();
 		console.log(btn)
@@ -404,15 +403,24 @@
     }
 
 	function addAnggota(nrp){
-		$('#formNrp').val(nrp);
+		var inputNrp = $('#formNRP').val(nrp);
+		console.log(nrp);
+		searchAnggota();
 	}
 	function toggle_pengikut(){
 		let selected_val = $('#formJenisSpd').val();
+		if(selected_val == 'Luar Negeri'){
+			$('#nmrSpd').html('SPDLN / ')
+		}else{
+			$('#nmrSpd').html('SPD / ')
+		}
 		if(selected_val == 'Rutin' || selected_val == 'Luar Negeri'){
 			$('#formPengikut').hide();
 		}else{
 			$('#formPengikut').show();
 		}
 	}
+
+
 </script>
 @endsection

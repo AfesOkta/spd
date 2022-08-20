@@ -71,9 +71,9 @@
     var table = $('.datatable').DataTable();
     $('.datepicker').datepicker({
         dateFormat: 'dd MM yy',
-        monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
 
-    })
+    }).datepicker('setDate', 'now')
     @if(session('msg-success'))
     // Display a success toast, with a title
     toastr.success('Success', '{{session('msg-success')}}')

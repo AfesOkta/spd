@@ -141,6 +141,7 @@
 		console.log(nrp)
 		// do ajax request
 		$.get('{{route('get-personel-data')}}', {nrp:nrp}, function(data){
+			data = JSON.parse(data);
 			$('#formPangkat').val(data.id_pangkat);
 			$('#formGolongan').val(data.id_golongan);
 			$('#formNama').val(data.nama_personel);
