@@ -31,4 +31,13 @@ class Spd extends Model
     public function personel(){
         return $this->hasOne(Personel::class, 'nrp', 'nrp');
     }
+    public function pengikut(){
+        return $this->hasMany(Pengikut::class, 'id_spd', 'id_spd');
+    }
+    public function kwitansi(){
+        return $this->hasMany(Kwitansi::class, 'no_spd', 'no_spd');
+    }
+    public function tujuan(){
+        return $this->hasOne(Tujuan::class, 'id_tujuan', 'tujuan_spd');
+    }
 }

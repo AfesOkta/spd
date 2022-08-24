@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" id="tab_tujuan" onclick="switch_tab('tab_tujuan')">Tujuan Perjalanan</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="tab_pembayaran" onclick="switch_tab('tab_pembayaran')">Pembayaran</a>
+            </li>
         </ul>
 	</div>
 	<div class="card-body">
@@ -137,6 +140,42 @@
                 </tbody>
             </table>
         </div>
+<!-- ======================== Pembayaran ============================= -->
+		<div class="content" id="content-tab_pembayaran" style="display: none;">
+            <h3>Pembayaran</h3>
+            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addPembayaranModal" data-toggle="modal">Tambah data</button>
+            <table class="table datatable-search-anggota">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th nowrap>Pembayaran</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $n=1;
+                    @endphp
+                    @foreach ($pembayaran as $row)
+                        <tr>
+                            <td>{{$n++}}</td>
+                            <td>{{$row->pembayaran}}</td>
+                            <td>
+                                <button 
+                                    class="btn btn-warning btn-sm" 
+                                    onclick="fill_edit_pembayaran('{{$row->id_pembayaran}}','{{$row->pembayaran}}')"
+                                    data-toggle="modal" data-target="#editPembayaranModal" >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Pembayaran?')" href="{{route('delete-pembayaran',['id_pembayaran'=>$row->id_pembayaran])}}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 	</div>
 </div>
 @endsection
@@ -152,6 +191,9 @@
 
 <x-modal_edit_tujuan />
 <x-modal_add_tujuan />
+
+<x-modal_edit_pembayaran />
+<x-modal_add_pembayaran />
 @endsection
 
 @section('extra-js')
@@ -180,6 +222,13 @@ function fill_edit_satker(id, nama)
     console.log({id:id, nama:nama})
     $('#form-satker-id').val(id);
     $('#form-satker-nama').val(nama);
+}
+
+function fill_edit_pembayaran(id, nama)
+{
+    console.log({id:id, nama:nama})
+    $('#form-pembayaran-id').val(id);
+    $('#form-pembayaran').val(nama);
 }
 
 function fill_edit_status(id, nama)

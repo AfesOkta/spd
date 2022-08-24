@@ -7,6 +7,7 @@ use App\Models\Pangkat;
 use App\Models\Satker;
 use App\Models\Status;
 use App\Models\Tujuan;
+use App\Models\Pembayaran;
 class MasterController extends Controller
 {
     public function index(Request $request){
@@ -14,6 +15,7 @@ class MasterController extends Controller
         $data['satker'] = Satker::get();
         $data['status'] = Status::get();
         $data['tujuan'] = Tujuan::get();
+        $data['pembayaran'] = Pembayaran::get();
         return view('master', $data);
     }
 
@@ -97,6 +99,25 @@ public function add_tujuan(Request $request){
 public function delete_tujuan(Request $request){
     $tujuan = Tujuan::where('id_tujuan',$request->input('id_tujuan'))->delete();
     return redirect()->route('master')->with('tab', 'tujuan');
+}
+// Pembayaran
+public function edit_pembayaran(Request $request){
+    $pembayaran = Pembayaran::find($request->input('id_pembayaran'));
+    $pembayaran->pembayaran  = $request->input('pembayaran');
+    $pembayaran->save();
+    return redirect()->route('master')->with('tab', 'pembayaran');
+}
+public function add_pembayaran(Request $request){
+    $pembayaran = Pembayaran::insert([
+        'id_pembayaran'=>$request->input('id_pembayaran'),
+        'pembayaran'=>$request->input('pembayaran'),
+    ]);
+    return redirect()->route('master')->with('tab', 'pembayaran');
+}
+
+public function delete_pembayaran(Request $request){
+    $pembayaran = Pembayaran::where('id_pembayaran',$request->input('id_pembayaran'))->delete();
+    return redirect()->route('master')->with('tab', 'pembayaran');
 }
 
 }

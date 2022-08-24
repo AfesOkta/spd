@@ -6,6 +6,7 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PejabatController;
 use App\Http\Controllers\PaguController;
 use App\Http\Controllers\SpdController;
+use App\Http\Controllers\KwitansiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,11 @@ Route::post('/add_tujuan', [MasterController::class, 'add_tujuan'])->name('add-t
 Route::post('/edit_tujuan', [MasterController::class, 'edit_tujuan'])->name('edit-tujuan');
 Route::get('/delete_tujuan', [MasterController::class, 'delete_tujuan'])->name('delete-tujuan');
 
+// Pembayaran
+Route::post('/add_pembayaran', [MasterController::class, 'add_pembayaran'])->name('add-pembayaran');
+Route::post('/edit_pembayaran', [MasterController::class, 'edit_pembayaran'])->name('edit-pembayaran');
+Route::get('/delete_pembayaran', [MasterController::class, 'delete_pembayaran'])->name('delete-pembayaran');
+
 // Personel
 Route::get('/get_personel_data', [PersonelController::class, 'get_personel_data'])->name('get-personel-data');
 Route::post('/add_personel', [PersonelController::class, 'add_personel'])->name('add-personel');
@@ -73,4 +79,10 @@ Route::get('/spd', [SpdController::class, 'index'])->name('spd');
 Route::get('/get_spd', [SpdController::class, 'get_spd_data'])->name('get-spd-data');
 Route::post('/add_spd', [SpdController::class, 'add_spd'])->name('add-spd');
 Route::get('/delete_spd/{id}', [SpdController::class, 'delete_spd'])->name('delete-spd');
+
+// Kwitansi
+Route::get('/kwitansi', [KwitansiController::class, 'index'])->name('kwitansi');
+Route::get('/get_kwitansi', [KwitansiController::class, 'get_kwitansi_data'])->name('get-kwitansi-data');
+Route::post('/add_kwitansi', [KwitansiController::class, 'add_kwitansi'])->name('add-kwitansi');
+Route::get('/delete_kwitansi/{id}', [KwitansiController::class, 'delete_kwitansi'])->name('delete-kwitansi');
 

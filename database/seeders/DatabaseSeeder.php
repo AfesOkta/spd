@@ -8,6 +8,7 @@ use App\Models\Pangkat;
 use App\Models\Satker;
 use App\Models\Status;
 use App\Models\Tujuan;
+use App\Models\Pembayaran;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -64,6 +65,18 @@ class DatabaseSeeder extends Seeder
                 "id_tujuan" => $data['0'],
                 "nama_tujuan" => $data['1'],
                 "uang_harian" => $data['2']
+            ]);
+        }
+        fclose($csvFile);
+        
+        // Pembayaran
+        Pembayaran::truncate();
+  
+        $csvFile = fopen(base_path("database/data/pembayaran.csv"), "r");
+        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+            Pembayaran::create([
+                "id_pembayaran" => $data['0'],
+                "pembayaran" => $data['1']
             ]);
         }
         fclose($csvFile);

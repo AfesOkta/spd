@@ -288,23 +288,26 @@
 
 						<div id="collapsePengikut" class="collapse" aria-labelledby="headingPengikut" data-parent="#accordion">
 							<div class="card-body">
-								<button class="btn btn-info btn-sm mb-2 float-right">Tambah</button>
+								<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-info btn-sm mb-2 float-right">Tambah</button>
 								<table class="table table-hover" style="width: 100%;">
 									<thead>
 										<tr>
-											<th>No</th>
 											<th>Nama</th>
 											<th>NRP</th>
 											<th>Pangkat/Golongan</th>
 											<th>Lama</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
+									<tbody id="daftarPengikut">
+
+									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="mt-2 btn btn-success">Simpan</button>
+				<button type="submit" class="mt-5 btn btn-success">Simpan</button>
 			</form>
 		</div>
 	</div>
@@ -362,7 +365,7 @@
 							</td>
 							<td class="text-center">
 								<button class="btn btn-sm btn-info mx-auto">
-									<i class="fa fa-users"></i> 0
+									<i class="fa fa-users"></i> {{$row->pengikut->count()>0?$row->pengikut->count():0}}
 								</button>
 							</td>
 							<td nowrap>
@@ -372,9 +375,9 @@
 								<button class="btn btn-sm btn-warning m-1">
 									<i class="fa fa-edit"></i>
 								</button>
-								<button class="btn btn-sm btn-danger m-1">
+								<a class="btn btn-sm btn-danger m-1" href="{{route('delete-spd', ['id'=>$row->id_spd])}}" onclick="return confirm('Hapus SPD?')">
 									<i class="fa fa-trash"></i>
-								</button>
+								</a>
 							</td>
 						</tr>
 					@endforeach
@@ -392,7 +395,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       	<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLabel">Tambah Satker</h5>
+        	<h5 class="modal-title" id="exampleModalLabel">Tambah Anggota</h5>
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           		<span aria-hidden="true">&times;</span>
         	</button>
@@ -435,9 +438,57 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Pengikut -->
+<div class="modal fade" id="modal-search-pengikut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="exampleModalLabel">Tambah Pengikut</h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+      	<div class="modal-body">
+				<div class="table-responsive">
+				<table class="table table-bordered table-hover datatable-search-anggota">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nama</th>
+							<th>NRP/Pangkat</th>
+							<th>Satker</th>
+							<th>Add</th>
+						</tr>
+					</thead>
+					<tbody>
+						@php
+						$n=1;
+						@endphp
+						@foreach ($personel as $anggota)
+						<tr>
+							<td>{{$n++}}</td>
+							<td>{{$anggota->nama_personel}}</td>
+							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
+							<td>{{$anggota->satker->nama_satker}}</td>
+							<td>
+								<button class="btn btn-primary btn-xs" data-dismiss="modal" onclick="addPengikut('{{$anggota->nrp}}')"><i class="fa fa-user-plus"></i></button>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+				</div>
+    	</div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('extra-js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 <script>
 
@@ -450,6 +501,27 @@
 			dataAnggota = "<tr><td>"+data.nama_personel+"</td><td>"+data.pangkat.nama_pangkat+"/"+data.nrp+"</td><td>"+data.pangkat.golongan+"</td><td>"+data.status.nama_status+"</td><td>"+data.jabatan+"</td><td>"+data.satker.nama_satker+"</td></tr>";
 			$('#dataAnggota').html(dataAnggota)
 		});
+	}
+
+	function addPengikut(nrp)
+	{
+		$.get("{{route('get-personel-data')}}", {nrp:nrp}, function(data){
+			data = JSON.parse(data)
+			console.log(data);
+			dataPengikut = "<tr>"+
+							"<td>"+data.nama_personel+"</td>"+
+							"<td>"+data.nrp+"</td>"+
+							"<td>"+data.pangkat.nama_pangkat+" / "+data.pangkat.golongan+"</td>"+
+							"<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>"+
+							"<input type='text' name='nrp_pengikut[]' value='"+nrp+"' hidden required>"+
+							"</td>"+
+							"<td><button type='button' class='btn btn-sm btn-danger' onclick='deletePengikut(this)'>x</button></td>"+
+							"</tr>";
+			$('#daftarPengikut').append(dataPengikut)
+		});
+	}
+	function deletePengikut(elm){
+		$(elm).parent().parent().remove();
 	}
 	function toggle_button_add(btn){
 		$('.btn-add').hide();

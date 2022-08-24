@@ -66,13 +66,13 @@
                 <!-- SPD -->
                 <li class="app-sidebar__heading">PROSES</li>
                 <li>
-                    <a href="{{route('spd')}}">
+                    <a href="{{route('spd')}}" class="@yield('spd-menu')">
                         <i class="metismenu-icon fa fa-thumbtack"></i>
                         SPD
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('kwitansi')}}" class="@yield('kwitansi-menu')">
                         <i class="metismenu-icon fa fa-file-lines"></i>
                         Kwitansi
                     </a>
