@@ -215,31 +215,8 @@
 		$('#form-lain-lain-rill').html('')
 		// do ajax request
 		let no_spd = $('#noSpd').val();
-		$.get('{{route('get-kwitansi-data-rill')}}', {no_spd:no_spd}, function(data){
-			
-			if(data.kwitansi.length <1){
-				fill_rill(no_spd)
-			}else{
-				$('#no_spd_rill').val(data.kwitansi[0].no_spd);
-				$('#id_pembayaran_rill').val(data.kwitansi[0].id_pembayaran);
-			   	data.kwitansi.forEach(add_rill_input)
-
-				var amount = total_biaya;
-	        	var locale = 'id';
-		        var options = {style: 'currency', currency: 'idr', minimumFractionDigits: 0, maximumFractionDigits: 0};
-		        var formatter = new Intl.NumberFormat(locale, options);
-		        $('#jumlahTotalRill').html(formatter.format(amount))
-	            // noSpd = no_spd.replaceAll('/','-')
-	            // $('.deleteKwitansiBtn').attr('href', "{{url('/')}}"+"/delete_rill/id="+noSpd)
-			}
-		});
-		
-	}
-
-	function fill_rill(no_spd){
 		$.get('{{route('get-kwitansi-data')}}', {no_spd:no_spd}, function(data){
-			console.log({'data-kw':data.kwitansi})
-
+			
 			$('#no_spd_rill').val(data.kwitansi[0].no_spd);
 			$('#id_pembayaran_rill').val(data.kwitansi[0].id_pembayaran);
 		   	data.kwitansi.forEach(add_rill_input)
@@ -251,8 +228,12 @@
 	        $('#jumlahTotalRill').html(formatter.format(amount))
             // noSpd = no_spd.replaceAll('/','-')
             // $('.deleteKwitansiBtn').attr('href', "{{url('/')}}"+"/delete_rill/id="+noSpd)
+			
 		});
+		
 	}
+
+
 
 
 	function add_rill_input(value, index, arr){
@@ -262,9 +243,18 @@
 		}else{
 			keterangan = value.keterangan
 		}
+
 		total_biaya += value.biaya * value.giat
+		if(value.rill != 0){
+			checked = "checked"
+			val_rill = '1'
+		}else{
+			checked = ''
+			val_rill = '0'
+		}
+		console.log(value.rill)
 		new_form = "<tr class='text-center p-0'>"+
-                            "<td class='p-1'><button type='button' class='btn text-danger' onclick='del_form(this); kalkulasi_biaya(this)' >x</button></td>"+
+                            "<td class='p-1'><div class='form-check'><input  type='hidden' value='0' name='rill["+index+"]' "+checked+"><input class='form-check-input' type='checkbox' value='1' name='rill["+index+"]' "+checked+"></div></td>"+
                             "<td class='p-1'>"+
                                 "<input type='text' class='form-control' name='rincian[]' value='"+value.rincian+"' autocomplete='off'>"+
                            "</td>"+

@@ -27,8 +27,8 @@ class KwitansiController extends Controller
                 'biaya' => $request->input('biaya')[$n],
                 'keterangan' => $value,
                 'id_pembayaran' => $request->input('pembayaran'),
+                'rill'=>$request->input('rill')?$request->input('rill')[$n]:'0',
             ];
-
             Kwitansi::insert($data);
             $n++;
         }
