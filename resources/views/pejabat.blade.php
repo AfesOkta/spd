@@ -73,13 +73,13 @@
 		<table class="mb-0 table table-hover datatable">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Nama</th>
-					<th>Pangkat</th>
-					<th>NRP</th>
-					<th>Jabatan Struktural</th>
-					<th>Jabatan Keuangan</th>
-					<th>Aksi</th>
+					<th class="text-sm p-0 m-0">#</th>
+					<th class="text-sm p-0 m-0">Nama</th>
+					<th class="text-sm p-0 m-0">Pangkat</th>
+					<th class="text-sm p-0 m-0">NRP</th>
+					<th class="text-sm p-0 m-0">Jabatan Struktural</th>
+					<th class="text-sm p-0 m-0">Jabatan Keuangan</th>
+					<th class="text-sm p-0 m-0">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -88,19 +88,19 @@
 				@endphp
 				@foreach ($pejabat as $row)
 					<tr>
-						<th scope="row">{{$n++}}</th>
-						<td>{{$row->personel->nama_personel}}</td>
-						<td>{{$row->personel->pangkat->nama_pangkat}}</td>
-						<td>{{$row->personel->nrp}}</td>
-						<td>{{$row->struktural}}</td>
-						<td>{{$row->keuangan}}</td>
-						<td>
+						<th  class="text-lg p-0 m-0" scope="row">{{$n++}}</th>
+						<td class="text-lg p-0 m-0" >{{$row->personel->nama_personel}}</td>
+						<td class="text-lg p-0 m-0" >{{$row->personel->pangkat->nama_pangkat}}</td>
+						<td class="text-lg p-0 m-0" >{{$row->personel->nrp}}</td>
+						<td class="text-lg p-0 m-0" >{{$row->struktural}}</td>
+						<td class="text-lg p-0 m-0" >{{$row->keuangan}}</td>
+						<td class="text-lg p-0 m-0" >
                             
 							<button 
 								onclick="fill_edit('{{$row->nrp}}')"
-                                class="btn btn-sm btn-warning" ><i class="fa fa-edit"></i></button>
+                                class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></button>
 							<a 
-                                class="btn btn-sm btn-danger"
+                                class="btn btn-sm btn-primary"
 								onclick="return confirm('Hapus Pejabat?')" 
 								href="{{route('delete-pejabat', ['id' => $row->id_pejabat ])}}"><i class="fa fa-trash"></i></a>
 						</td>

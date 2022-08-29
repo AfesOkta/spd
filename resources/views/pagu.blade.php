@@ -71,13 +71,13 @@
 		<table class="mb-0 table table-hover datatable" >
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Akun</th>
-					<th>Pagu</th>
-					<th>Realisasi</th>
-					<th>Sisa</th>
-					<th>Keterangan</th>
-					<th>Aksi</th>
+					<th class="text-sm p-2 m-0">#</th>
+					<th class="text-sm p-2 m-0">Akun</th>
+					<th class="text-sm p-2 m-0">Pagu</th>
+					<th class="text-sm p-2 m-0">Realisasi</th>
+					<th class="text-sm p-2 m-0">Sisa</th>
+					<th class="text-sm p-2 m-0">Keterangan</th>
+					<th class="text-sm p-2 m-0">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -86,19 +86,19 @@
 				@endphp
 				@foreach ($pagu as $row)
 					<tr>
-						<th scope="row">{{$n++}}</th>
-						<td>{{$row->akun}}</td>
-						<td>Rp. {{number_format($row->pagu, 0,',','.')}},-</td>
-						<td>Rp. {{number_format($row->realisasi, 0,',','.')}},-</td>
-						<td>Rp. {{number_format($row->sisa, 0,',','.')}},-</td>
-						<td>{{$row->ket}}</td>
-						<td>
+						<th class="text-sm p-0 m-0" scope="row">{{$n++}}</th>
+						<td class="text-sm p-0 m-0">{{$row->akun}}</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->pagu, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->realisasi, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->sisa, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">{{$row->ket}}</td>
+						<td class="text-sm p-0 m-0">
                             
 							<button 
 								onclick="fill_edit('{{$row->akun}}')"
-                                class="btn btn-sm btn-warning" ><i class="fa fa-edit"></i></button>
+                                class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></button>
 							<a 
-                                class="btn btn-sm btn-danger"
+                                class="btn btn-sm btn-primary"
 								onclick="return confirm('Hapus Pagu?')" 
 								href="{{route('delete-pagu', ['id' => $row->id_pagu ])}}"><i class="fa fa-trash"></i></a>
 						</td>

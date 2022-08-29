@@ -13,9 +13,6 @@
                 <a class="nav-link" href="#" id="tab_satker" onclick="switch_tab('tab_satker')">Satker</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="tab_status" onclick="switch_tab('tab_status')">Status</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#" id="tab_tujuan" onclick="switch_tab('tab_tujuan')">Tujuan Perjalanan</a>
             </li>
             <li class="nav-item">
@@ -32,10 +29,10 @@
             <table class="table datatable">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Nama Pangkat</th>
-                        <th>Golongan</th>
-                        <th>Aksi</th>
+                        <th class="text-lg p-0 m-0">No</th>
+                        <th class="text-lg p-0 m-0">Nama Pangkat</th>
+                        <th class="text-lg p-0 m-0">Golongan</th>
+                        <th class="text-lg p-0 m-0">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,17 +41,17 @@
                     @endphp
                     @foreach ($pangkat as $row)
                         <tr>
-                            <td>{{$n++}}</td>
-                            <td>{{$row->nama_pangkat}}</td>
-                            <td>{{$row->golongan}}</td>
-                            <td>
+                            <td class="text-sm p-0 m-0">{{$n++}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->nama_pangkat}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->golongan}}</td>
+                            <td class="text-sm p-0 m-0">
                                 <button 
-                                    class="btn btn-warning btn-sm" 
+                                    class="btn btn-primary btn-sm" 
                                     onclick="fill_edit_pangkat('{{$row->id_pangkat}}','{{$row->nama_pangkat}}','{{$row->golongan}}')"
                                     data-toggle="modal" data-target="#editPangkatModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Pangkat?')" href="{{route('delete-pangkat',['id_pangkat'=>$row->id_pangkat])}}">
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Pangkat?')" href="{{route('delete-pangkat',['id_pangkat'=>$row->id_pangkat])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -72,9 +69,9 @@
             <table class="table datatable-search-anggota">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th nowrap>Nama Satker</th>
-                        <th>Aksi</th>
+                        <th class="text-lg p-0 m-0">No</th>
+                        <th class="text-lg p-0 m-0" nowrap>Nama Satker</th>
+                        <th class="text-lg p-0 m-0">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,16 +80,16 @@
                     @endphp
                     @foreach ($satker as $row)
                         <tr>
-                            <td>{{$n++}}</td>
-                            <td>{{$row->nama_satker}}</td>
-                            <td>
+                            <td class="text-sm p-0 m-0">{{$n++}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->nama_satker}}</td>
+                            <td class="text-sm p-0 m-0">
                                 <button 
-                                    class="btn btn-warning btn-sm" 
+                                    class="btn btn-primary btn-sm" 
                                     onclick="fill_edit_satker('{{$row->id_satker}}','{{$row->nama_satker}}')"
                                     data-toggle="modal" data-target="#editSatkerModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Satker?')" href="{{route('delete-satker',['id_satker'=>$row->id_satker])}}">
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Satker?')" href="{{route('delete-satker',['id_satker'=>$row->id_satker])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -101,7 +98,7 @@
                 </tbody>
             </table>
         </div>
-<!-- ======================== Status ============================= -->
+
 <!-- ======================== Tujuan Perjalanan ============================= -->
 		<div class="content" id="content-tab_tujuan" style="display: none;">
             <h3>Tujuan Perjalanan</h3>
@@ -109,10 +106,10 @@
             <table class="table datatable">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th nowrap>Nama Kota</th>
-                        <th nowrap>Uang Harian</th>
-                        <th>Aksi</th>
+                        <th class="text-lg p-0 m-0">No</th>
+                        <th class="text-lg p-0 m-0" nowrap>Nama Kota</th>
+                        <th class="text-lg p-0 m-0" nowrap>Uang Harian</th>
+                        <th class="text-lg p-0 m-0">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,17 +118,17 @@
                     @endphp
                     @foreach ($tujuan as $row)
                         <tr>
-                            <td>{{$n++}}</td>
-                            <td>{{$row->nama_tujuan}}</td>
-                            <td>Rp. {{number_format($row->uang_harian,0,',','.')}},-</td>
-                            <td>
+                            <td class="text-sm p-0 m-0">{{$n++}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->nama_tujuan}}</td>
+                            <td class="text-sm p-0 m-0">Rp. {{number_format($row->uang_harian,0,',','.')}},-</td>
+                            <td class="text-sm p-0 m-0">
                                 <button 
-                                    class="btn btn-warning btn-sm" 
+                                    class="btn btn-primary btn-sm" 
                                     onclick="fill_edit_tujuan('{{$row->id_tujuan}}','{{$row->nama_tujuan}}','{{$row->uang_harian}}')"
                                     data-toggle="modal" data-target="#editTujuanModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Tujuan?')" href="{{route('delete-tujuan',['id_tujuan'=>$row->id_tujuan])}}">
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Tujuan?')" href="{{route('delete-tujuan',['id_tujuan'=>$row->id_tujuan])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -147,9 +144,9 @@
             <table class="table datatable-search-anggota">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th nowrap>Pembayaran</th>
-                        <th>Aksi</th>
+                        <th class="text-lg p-0 m-0">No</th>
+                        <th class="text-lg p-0 m-0" nowrap>Pembayaran</th>
+                        <th class="text-lg p-0 m-0">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,16 +155,16 @@
                     @endphp
                     @foreach ($pembayaran as $row)
                         <tr>
-                            <td>{{$n++}}</td>
-                            <td>{{$row->pembayaran}}</td>
-                            <td>
+                            <td class="text-sm p-0 m-0">{{$n++}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->pembayaran}}</td>
+                            <td class="text-sm p-0 m-0">
                                 <button 
-                                    class="btn btn-warning btn-sm" 
+                                    class="btn btn-primary btn-sm" 
                                     onclick="fill_edit_pembayaran('{{$row->id_pembayaran}}','{{$row->pembayaran}}')"
                                     data-toggle="modal" data-target="#editPembayaranModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus Pembayaran?')" href="{{route('delete-pembayaran',['id_pembayaran'=>$row->id_pembayaran])}}">
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Pembayaran?')" href="{{route('delete-pembayaran',['id_pembayaran'=>$row->id_pembayaran])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('rincian');
             $table->integer('giat');
             $table->integer('biaya');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->string('id_pembayaran', 11);
         });
     }

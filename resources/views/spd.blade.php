@@ -51,7 +51,7 @@
 											<div class="input-group-append btn-group">
 												<button type="button" class="btn btn-default" disabled>/{{$m[date('m')]}}/TUK.2.1/{{date('Y')}}</button>
 												<button id="btn-search" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-												<button id="btn-print" type="button" class="btn btn-info"><i class="fa fa-print"></i></button>
+												<button id="btn-print" type="button" class="btn btn-primary"><i class="fa fa-print"></i></button>
 											</div>
 										</div>
 									</div>
@@ -288,7 +288,7 @@
 
 						<div id="collapsePengikut" class="collapse" aria-labelledby="headingPengikut" data-parent="#accordion">
 							<div class="card-body">
-								<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-info btn-sm mb-2 float-right">Tambah</button>
+								<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-primary btn-sm mb-2 float-right">Tambah</button>
 								<table class="table table-hover" style="width: 100%;">
 									<thead>
 										<tr>
@@ -307,7 +307,7 @@
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="mt-5 btn btn-success">Simpan</button>
+				<button type="submit" class="mt-5 btn btn-primary">Simpan</button>
 			</form>
 		</div>
 	</div>
@@ -318,16 +318,16 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="mb-0 table table-hover table-bordered datatable " >
+			<table class="mb-0 table table-sm table-striped table-bordered datatable " >
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>SPD</th>
-						<th>Anggota</th>
-						<th>Keterangan</th>
-						<th>Waktu</th>
-						<th>Pengikut</th>
-						<th>Aksi</th>
+						<th class="text-sm p-2 text-center m-0">#</th>
+						<th class="text-sm p-2 text-center m-0">SPD</th>
+						<th class="text-sm p-2 text-center m-0">Anggota</th>
+						<th class="text-sm p-2 text-center m-0">Keterangan</th>
+						<th class="text-sm p-2 text-center m-0">Waktu</th>
+						<th class="text-sm p-2 text-center m-0">Pengikut</th>
+						<th class="text-sm p-2 text-center m-0">Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -336,24 +336,24 @@
 					@endphp
 					@foreach ($spd as $row )
 						<tr>
-							<td>
+							<td class="text-xxs p-2 m-0">
 								{{$n++}}
 							</td>
-							<td>
+							<td class="text-xxs p-2 m-0">
 								<b>{{$row->no_spd}}</b><br>
 								Tanggal: {{$row->tanggal_spd}} <br>
 								Jenis: {{$row->jenis_spd}}
 							</td>
-							<td>
+							<td class="text-xxs p-2 m-0">
 								<b>{{$row->personel->nama_personel}}</b><br>
 								NRP: {{$row->nrp}} <br>
 								Pangkat/Golongan: {{$row->personel->pangkat->nama_pangkat}} / {{$row->personel->pangkat->golongan}}
 							</td>
-							<td>
+							<td class="text-xxs p-2 m-0">
 								{{$row->jenis_pengeluaran}} / 
 								{{$row->keperluan}}
 							</td>
-							<td>
+							<td class="text-xxs p-2 m-0">
 								@php
 								$earlier = new DateTime($row->tanggal_berangkat);
 								$later = new DateTime($row->tanggal_kembali);
@@ -363,19 +363,19 @@
 								{{$row->tanggal_berangkat}} - {{$row->tanggal_kembali}} / <br>
 								{{$abs_diff+1}} Hari
 							</td>
-							<td class="text-center">
-								<button class="btn btn-sm btn-info mx-auto">
+							<td class="text-center text-xxs p-2 m-0">
+								<button class="btn btn-sm btn-primary mx-auto">
 									<i class="fa fa-users"></i> {{$row->pengikut->count()>0?$row->pengikut->count():0}}
 								</button>
 							</td>
-							<td nowrap>
-								<button class="btn btn-sm btn-info m-1">
+							<td class="text-xxs p-2 m-0" nowrap>
+								<button class="btn btn-sm btn-primary m-1">
 									<i class="fa fa-eye"></i>
 								</button>
-								<button class="btn btn-sm btn-warning m-1">
+								<button class="btn btn-sm btn-primary m-1">
 									<i class="fa fa-edit"></i>
 								</button>
-								<a class="btn btn-sm btn-danger m-1" href="{{route('delete-spd', ['id'=>$row->id_spd])}}" onclick="return confirm('Hapus SPD?')">
+								<a class="btn btn-sm btn-primary m-1" href="{{route('delete-spd', ['id'=>$row->id_spd])}}" onclick="return confirm('Hapus SPD?')">
 									<i class="fa fa-trash"></i>
 								</a>
 							</td>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PejabatController;
 use App\Http\Controllers\PaguController;
 use App\Http\Controllers\SpdController;
 use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\KwrilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,4 +86,10 @@ Route::get('/kwitansi', [KwitansiController::class, 'index'])->name('kwitansi');
 Route::get('/get_kwitansi', [KwitansiController::class, 'get_kwitansi_data'])->name('get-kwitansi-data');
 Route::post('/add_kwitansi', [KwitansiController::class, 'add_kwitansi'])->name('add-kwitansi');
 Route::get('/delete_kwitansi/{id}', [KwitansiController::class, 'delete_kwitansi'])->name('delete-kwitansi');
+
+
+// Kwitansi Rill
+Route::get('/get_kwitansi_rill', [KwrilController::class, 'get_kwitansi_data'])->name('get-kwitansi-data-rill');
+Route::post('/add_kwitansi_rill', [KwrilController::class, 'add_kwitansi'])->name('add-kwitansi-rill');
+Route::get('/delete_kwitansi_rill/{id}', [KwrilController::class, 'delete_kwitansi'])->name('delete-kwitansi-rill');
 

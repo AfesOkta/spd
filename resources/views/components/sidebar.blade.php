@@ -1,4 +1,4 @@
-<div class="app-sidebar sidebar-shadow bg-dark sidebar-text-light">
+<div class="app-sidebar sidebar-shadow bg-dark sidebar-text-light ">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -28,7 +28,8 @@
                 </span>
             </button>
         </span>
-    </div>    <div class="scrollbar-sidebar">
+    </div>    
+    <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Dashboards</li>
