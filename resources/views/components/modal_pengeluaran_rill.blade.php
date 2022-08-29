@@ -1,7 +1,7 @@
-<form action="{{route('add-kwitansi-rill')}}" method="POST" class="table-responsive"> 
+<form action="{{route('add-kwitansi')}}" method="POST" class="table-responsive"> 
  @csrf
 <input type="text" name="no_spd" id="no_spd_rill" hidden>
-<input type="text" name="id_pembayaran" id="id_pembayaran_rill" hidden>
+<input type="text" name="pembayaran" id="id_pembayaran_rill" hidden>
 <!-- Modal -->
 <div class="modal fade" id="modalRill" tabindex="-1" aria-labelledby="modalRillLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">

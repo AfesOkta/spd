@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('biaya');
             $table->text('keterangan')->nullable();
             $table->string('id_pembayaran', 11);
+            $table->boolean('rill')->default(0)->nullable();
         });
         Schema::create('daftar_pengeluaran_ril', function (Blueprint $table) {
             $table->increments('id_pengeluaran')->primary;
