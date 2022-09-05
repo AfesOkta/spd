@@ -78,6 +78,7 @@ Route::get('/delete_pagu/{id}', [PaguController::class, 'delete_pagu'])->name('d
 // SPD
 Route::get('/spd', [SpdController::class, 'index'])->name('spd');
 Route::get('/get_spd', [SpdController::class, 'get_spd_data'])->name('get-spd-data');
+Route::get('/get_spd_by_id', [SpdController::class, 'get_spd_by_id'])->name('get-spd-by-id');
 Route::post('/add_spd', [SpdController::class, 'add_spd'])->name('add-spd');
 Route::get('/delete_spd/{id}', [SpdController::class, 'delete_spd'])->name('delete-spd');
 

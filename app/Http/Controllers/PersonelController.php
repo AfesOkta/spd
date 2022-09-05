@@ -8,6 +8,9 @@ use App\Models\Golongan;
 use App\Models\Satker;
 use App\Models\Status;
 use App\Models\Personel;
+use App\Models\Spd;
+use App\Models\Kwitansi;
+use App\Models\Kwril;
 
 class PersonelController extends Controller
 {
@@ -15,7 +18,7 @@ class PersonelController extends Controller
         $data['pangkat'] = Pangkat::get();
         $data['satker'] = Satker::get();
         $data['status'] = Status::get();
-        $data['personel'] = Personel::get();
+        $data['personel'] = Personel::where('is_deleted',0)->get();
         return view('personel', $data);
     }
     public function get_personel_data(Request $request){
@@ -35,6 +38,7 @@ class PersonelController extends Controller
             'id_satker'=> 'required',  
             'id_status'=>'required'
         ]);
+        $valid_input['is_deleted'] = 0;
 
         // upsert
         $res = Personel::updateOrCreate(['nrp'=>$request->input('nrp')], $valid_input);
@@ -43,7 +47,9 @@ class PersonelController extends Controller
 
     
     public function delete_personel($nrp){
-        $data = Personel::where('nrp', $nrp)->delete();
+        
+
+        $data = Personel::where('nrp', $nrp)->update(['is_deleted'=>1]);
         if($data){
             return redirect()->route('personel')->with('msg-warning', 'Data berhasil dihapus');
         } else{

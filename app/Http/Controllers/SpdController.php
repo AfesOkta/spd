@@ -41,6 +41,17 @@ class SpdController extends Controller
         if($data->count()>0) return response()->json($data);
     }
 
+    public function get_spd_by_id(Request $request){
+        $id_spd = $request->input('id_spd');
+        // dd($id_spd);
+        $data = Spd::find($id_spd);
+        $data->personel = $data->personel;
+        $data->tujuan = $data->tujuan;
+        $data->pangkat = $data->personel->pangkat;
+        if($data->count()>0) return response()->json($data);
+
+    }
+
     public function add_spd(Request $request){
         
         $valid_input = $request->validate([

@@ -3,11 +3,9 @@
 @section('page-title-desc', 'Data Pagu')
 @section('pagu-menu', 'mm-active')
 @section('content')
+			@if ($errors->any())
 <div class="card col-12 mb-3">
 	<div class="card-body">
-		<div class="card-body">
-			<h5 class="card-title">Tambah Pagu</h5>
-			@if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>
 						@foreach ($errors->all() as $error)
@@ -15,9 +13,68 @@
 						@endforeach
 					</ul>
 				</div>
+	</div>
+</div>
 			@endif
-			<form action="{{route('add-pagu')}}" method="POST"> 
-				@csrf
+<div class="card col-12">
+	<div class="card-header d-flex flex-row justify-content-between">
+		<h4>Data Pagu</h4>
+		<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAddPagu">Tambah Pagu</button>
+	</div>
+	<div class="card-body">
+		<table class="mb-0 table table-hover datatable" >
+			<thead>
+				<tr>
+					<th class="text-sm p-2 m-0">#</th>
+					<th class="text-sm p-2 m-0">Akun</th>
+					<th class="text-sm p-2 m-0">Pagu</th>
+					<th class="text-sm p-2 m-0">Realisasi</th>
+					<th class="text-sm p-2 m-0">Sisa</th>
+					<th class="text-sm p-2 m-0">Keterangan</th>
+					<th class="text-sm p-2 m-0">Aksi</th>
+				</tr>
+			</thead>
+			<tbody>
+				@php
+					$n=1;
+				@endphp
+				@foreach ($pagu as $row)
+					<tr>
+						<td class="text-sm p-0 m-0" scope="row">{{$n++}}</td>
+						<td class="text-sm p-0 m-0">{{$row->akun}}</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->pagu, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->realisasi, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">Rp. {{number_format($row->sisa, 0,',','.')}},-</td>
+						<td class="text-sm p-0 m-0">{{$row->ket}}</td>
+						<td class="text-sm p-0 m-0">
+                            
+							<button 
+								onclick="fill_edit('{{$row->akun}}', '{{$row->id_pagu}}')"
+                                class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalAddPagu"><i class="fa fa-edit"></i></button>
+						</td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+</div>
+@endsection
+
+@section('modal')
+<!-- Modal -->
+<form action="{{route('add-pagu')}}" method="POST"> 
+	@csrf
+	<div class="modal fade" id="modalAddPagu" tabindex="-1" aria-labelledby="modalAddPaguLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalAddPaguLabel">Tambah Pagu</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="formAkun" class="">Akun</label>
@@ -58,57 +115,26 @@
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="mt-2 btn btn-success">Simpan</button>
-			</form>
+				</div>
+				<div class="modal-footer d-flex flex-row justify-content-between">
+
+					<a 
+					class="btn btn-sm text-danger"
+					onclick="return confirm('Hapus Pagu?')" 
+					id="deletePaguBtn" 
+					href="">Hapus</a>
+					<div class="btn-group">
+						<button type="submit" class=" btn btn-success">Simpan</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="card col-12">
-	<div class="card-header">
-		<h4>Data Pagu</h4>
-	</div>
-	<div class="card-body">
-		<table class="mb-0 table table-hover datatable" >
-			<thead>
-				<tr>
-					<th class="text-sm p-2 m-0">#</th>
-					<th class="text-sm p-2 m-0">Akun</th>
-					<th class="text-sm p-2 m-0">Pagu</th>
-					<th class="text-sm p-2 m-0">Realisasi</th>
-					<th class="text-sm p-2 m-0">Sisa</th>
-					<th class="text-sm p-2 m-0">Keterangan</th>
-					<th class="text-sm p-2 m-0">Aksi</th>
-				</tr>
-			</thead>
-			<tbody>
-				@php
-					$n=1;
-				@endphp
-				@foreach ($pagu as $row)
-					<tr>
-						<th class="text-sm p-0 m-0" scope="row">{{$n++}}</th>
-						<td class="text-sm p-0 m-0">{{$row->akun}}</td>
-						<td class="text-sm p-0 m-0">Rp. {{number_format($row->pagu, 0,',','.')}},-</td>
-						<td class="text-sm p-0 m-0">Rp. {{number_format($row->realisasi, 0,',','.')}},-</td>
-						<td class="text-sm p-0 m-0">Rp. {{number_format($row->sisa, 0,',','.')}},-</td>
-						<td class="text-sm p-0 m-0">{{$row->ket}}</td>
-						<td class="text-sm p-0 m-0">
-                            
-							<button 
-								onclick="fill_edit('{{$row->akun}}')"
-                                class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></button>
-							<a 
-                                class="btn btn-sm btn-primary"
-								onclick="return confirm('Hapus Pagu?')" 
-								href="{{route('delete-pagu', ['id' => $row->id_pagu ])}}"><i class="fa fa-trash"></i></a>
-						</td>
-					</tr>
-				@endforeach
-			</tbody>
-		</table>
-	</div>
-</div>
+</form>
+
 @endsection
+
 
 @section('extra-js')
 
@@ -126,11 +152,20 @@
             console.log(data)
 		});
 	});
-
-    function fill_edit(akun){
+	$('#modalAddPagu').on('hide.bs.modal', function(){
+		$('#formId').val('');
+			$('#formPagu').val('');
+			$('#formRealisasi').val('');
+			$('#formSisa').val('');
+			$('#formKet').val('');
+	});
+    function fill_edit(akun, id){
 		$('#formAkun').val(akun);
         $('#btn-search').click();
         $('#formAkun').focus()
+
+		$('#deletePaguBtn').attr('href', "{{url('/')}}"+"/delete_pagu/"+id)
+
     }
 </script>
 @endsection

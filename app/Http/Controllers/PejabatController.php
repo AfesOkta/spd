@@ -23,11 +23,12 @@ class PejabatController extends Controller
         }else{
             $data = $data[0];
         }
+
         $res = [
             'nrp' => $data->nrp,
             'nama_personel' => $data->personel?$data->personel->nama_personel:$data->nama_personel,
             'id_pangkat' => $data->personel?$data->personel->id_pangkat:$data->id_pangkat,
-            'struktural' => $data->struktural?$data->struktural:'',
+            'jabatan' => $data->jabatan?$data->jabatan:$data->struktural,
             'keuangan' => $data->keuangan?$data->keuangan:'',
         ];
         if($data->count()>0) return response()->json($res);

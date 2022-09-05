@@ -42,7 +42,7 @@
 				@endphp
 				@foreach ($personel as $row)
 				<tr>
-					<th class="text-lg p-0 m-0" scope="row">{{$n++}}</th>
+					<td class="text-lg p-0 m-0" scope="row">{{$n++}}</td>
 					<td class="text-lg p-0 m-0">{{$row->nrp}}</td>
 					<td class="text-lg p-0 m-0">{{$row->nama_personel}}</td>
 					<td class="text-lg p-0 m-0">{{$row->pangkat?$row->pangkat->nama_pangkat:''}}</td>
@@ -56,10 +56,6 @@
 						<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAddPersonel" onclick="fill_edit('{{$row->nrp}}')">
 							<i class="fa fa-edit fa-xs"></i>
 						</button>
-						<a 
-						class="btn btn-primary btn-sm"
-						onclick="return confirm('Hapus Personel?')" 
-						href="{{route('delete-personel', ['nrp' => $row->nrp ])}}"><i class="fa fa-trash fa-xs"></i></a>
 					</td>
 					<!-- Sampe sini -->
 				</tr>
@@ -92,7 +88,9 @@
 	function fill_edit(nrp){
 		$('#formNRP').val(nrp);
 		$('#btn-search').click();
-		$('#formNRP').focus()
+		$('#formNRP').focus();
+
+        $('#deletePersonelBtn').attr('href', "{{url('/')}}"+"/delete_personel/"+nrp)
 	}
 </script>
 @endsection
@@ -174,9 +172,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="submit" class="mt-2 btn btn-success">Simpan</button>
+				<div class="modal-footer d-flex flex-row justify-content-between">
+
+						<a 
+						class="btn btn-sm text-danger"
+						onclick="return confirm('Hapus Personel?')" 
+						id="deletePersonelBtn" 
+						href="">Hapus</a>
+						<div class="btn-group">
+					<button type="submit" class=" btn btn-success">Simpan</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
 				</div>
 			</div>
 		</div>
