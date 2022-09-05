@@ -154,10 +154,11 @@
 	});
 	$('#modalAddPagu').on('hide.bs.modal', function(){
 		$('#formId').val('');
-			$('#formPagu').val('');
-			$('#formRealisasi').val('');
-			$('#formSisa').val('');
-			$('#formKet').val('');
+		$('#formAkun').val('')
+		$('#formPagu').val(0);
+		$('#formRealisasi').val(0);
+		$('#formSisa').val(0);
+		$('#formKet').val('');
 	});
     function fill_edit(akun, id){
 		$('#formAkun').val(akun);
