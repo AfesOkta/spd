@@ -7,6 +7,7 @@ use App\Http\Controllers\PejabatController;
 use App\Http\Controllers\PaguController;
 use App\Http\Controllers\SpdController;
 use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\KwitansiLnController;
 use App\Http\Controllers\KwrilController;
 /*
 |--------------------------------------------------------------------------

@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Kwitansi;
 use App\Models\Spd;
 use App\Models\Pembayaran;
-class KwitansiController extends Controller
+class KwitansiLnController extends Controller
 {
     public function index(Request $request){
         $data = [
-            'spd'=>Spd::orderBy('id_spd', 'desc')->where('no_spd', 'not like', 'SPDLN%')->get(),
+            'spd'=>Spd::orderBy('id_spd', 'desc')->where('no_spd', 'like', 'SPDLN%')->get(),
             'pembayaran'=>Pembayaran::get(),
         ];
-        return view('kwitansi', $data);
+        return view('kwitansiln', $data);
     }
 
-    public function add_kwitansi(Request $request){
+    public function add_kwitansi_ln(Request $request){
         $n=0;
         Kwitansi::where('no_spd', $request->input('no_spd'))->delete();
         foreach($request->input('keterangan') as $key=>$value){
@@ -33,9 +33,9 @@ class KwitansiController extends Controller
             $n++;
         }
 
-        return redirect()->route('kwitansi')->with('msg-success', 'Data Kwitansi Berhasil Ditambahkan');
+        return redirect()->route('kwitansi_ln')->with('msg-success', 'Data Kwitansi Berhasil Ditambahkan');
     }
-    public function get_kwitansi_data(Request $request){
+    public function get_kwitansi_ln_data(Request $request){
         $no_spd = $request->input('no_spd');
         // dd($no_spd);
         $data['kwitansi'] = Kwitansi::where('no_spd',$no_spd)->get();
@@ -46,12 +46,12 @@ class KwitansiController extends Controller
         return response()->json($data);
     }
 
-    public function delete_kwitansi($no_spd){
+    public function delete_kwitansi_ln($no_spd){
         $no_spd = str_replace('-','/',$no_spd);
         $no_spd = str_replace('id=','',$no_spd);
         $del = Kwitansi::where('no_spd', $no_spd)->delete();
         if($del){
-            return redirect()->route('kwitansi')->with('msg-error', 'Data kwitansi dihapus!');
+            return redirect()->route('kwitansi_ln')->with('msg-error', 'Data kwitansi dihapus!');
         }else{
             dd($no_spd);
         }

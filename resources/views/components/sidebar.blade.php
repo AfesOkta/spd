@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('kwitansi_ln')}}" class="@yield('kwitansiln-menu')">
                         <i class="metismenu-icon fa fa-file-lines"></i>
                         Kwitansi LN
                     </a>
