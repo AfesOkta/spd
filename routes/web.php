@@ -88,6 +88,12 @@ Route::get('/get_kwitansi', [KwitansiController::class, 'get_kwitansi_data'])->n
 Route::post('/add_kwitansi', [KwitansiController::class, 'add_kwitansi'])->name('add-kwitansi');
 Route::get('/delete_kwitansi/{id}', [KwitansiController::class, 'delete_kwitansi'])->name('delete-kwitansi');
 
+// Kwitansi LN
+Route::get('/kwitansi_ln', [KwitansiLnController::class, 'index'])->name('kwitansi_ln');
+Route::get('/get_kwitansi_ln', [KwitansiLnController::class, 'get_kwitansi_ln_data'])->name('get-kwitansi_ln-data');
+Route::post('/add_kwitansi_ln', [KwitansiLnController::class, 'add_kwitansi_ln'])->name('add-kwitansi_ln');
+Route::get('/delete_kwitansi_ln/{id}', [KwitansiLnController::class, 'delete_kwitansi_ln'])->name('delete-kwitansi_ln');
+
 
 // Kwitansi Rill
 Route::get('/get_kwitansi_rill', [KwrilController::class, 'get_kwitansi_data'])->name('get-kwitansi-data-rill');

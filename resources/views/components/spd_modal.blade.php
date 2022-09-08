@@ -1,4 +1,3 @@
-
 @section('modal')
 <!-- Modal -->
 <form action="{{route('add-spd')}}" method="POST"> 

@@ -10,7 +10,7 @@ class KwitansiController extends Controller
 {
     public function index(Request $request){
         $data = [
-            'spd'=>Spd::orderBy('id_spd', 'desc')->get(),
+            'spd'=>Spd::orderBy('id_spd', 'desc')->like('no_spd', 'like', 'SPD%')->get(),
             'pembayaran'=>Pembayaran::get(),
         ];
         return view('kwitansi', $data);
