@@ -113,10 +113,6 @@
 			$('#noSpd').val(no_spd)
 			$('#namaPelaksana').val(data.personel.nama_personel)
 			$('#pangkatNrp').val(data.pangkat.nama_pangkat+'/'+data.personel.nrp)
-			
-            // transportasi asal - tujuan
-            $('#asalTujuan').val(data.spd.asal_spd+' -> '+data.tujuan.nama_tujuan)
-            $('#tujuanAsal').val(data.tujuan.nama_tujuan+' -> '+data.spd.asal_spd)
 
             // uang Harian
             lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
@@ -135,66 +131,29 @@
 			$('#namaPelaksana').val(data.spd.personel.nama_personel)
 			$('#pangkatNrp').val(data.pangkat.nama_pangkat+'/'+data.personel.nrp)
 			
-			// penginapan
-			var penginapan = data.kwitansi[0]; 
-			$('#rincianPenginapan').val(penginapan.rincian)
-			$('#giatPenginapan').val(penginapan.giat)
-			$('#biayaPenginapan').val(penginapan.biaya)
-			$('#jumlahPenginapan').val(penginapan.giat * penginapan.biaya )
-			$('#keteranganPenginapan').val(penginapan.keterangan )
-			total_biaya += penginapan.giat * penginapan.biaya
+
 
             // transportasi asal - tujuan
-            $('.rincianTransportasi1').val(data.kwitansi[1].rincian)
-			$('.giatTransportasi1').val(data.kwitansi[1].giat)
-			$('.biayaTransportasi1').val(data.kwitansi[1].biaya)
-			$('.jumlahTransportasi1').val(data.kwitansi[1].giat * data.kwitansi[1].biaya )
-			$('.keteranganTransportasi1').val(data.kwitansi[1].keterangan )
-			total_biaya += data.kwitansi[1].giat * data.kwitansi[1].biaya
-			
-			// transportasi tujuan - asal
-            $('.rincianTransportasi2').val(data.kwitansi[2].rincian)
-			$('.giatTransportasi2').val(data.kwitansi[2].giat)
-			$('.biayaTransportasi2').val(data.kwitansi[2].biaya)
-			$('.jumlahTransportasi2').val(data.kwitansi[2].giat * data.kwitansi[2].biaya )
-			$('.keteranganTransportasi2').val(data.kwitansi[2].keterangan )
-			total_biaya += data.kwitansi[2].giat * data.kwitansi[2].biaya
+            $('.rincianTransportasi1').val(data.kwitansi[0].rincian)
+			$('.giatTransportasi1').val(data.kwitansi[0].giat)
+			$('.biayaTransportasi1').val(data.kwitansi[0].biaya)
+			$('.jumlahTransportasi1').val(data.kwitansi[0].giat * data.kwitansi[0].biaya )
+			$('.keteranganTransportasi1').val(data.kwitansi[0].keterangan )
+			total_biaya += data.kwitansi[0].giat * data.kwitansi[0].biaya
 
-			// transportasi taxi spd asal - bandara PP
-            $('.rincianTransportasi3').val(data.kwitansi[3].rincian)
-			$('.giatTransportasi3').val(data.kwitansi[3].giat)
-			$('.biayaTransportasi3').val(data.kwitansi[3].biaya)
-			$('.jumlahTransportasi3').val(data.kwitansi[3].giat * data.kwitansi[3].biaya)
-			$('.keteranganTransportasi3').val(data.kwitansi[3].keterangan)
-			total_biaya += data.kwitansi[3].giat * data.kwitansi[3].biaya
-
-			// transportasi taxi kota tujuan - bandara PP
-            $('.rincianTransportasi4').val(data.kwitansi[4].rincian)
-			$('.giatTransportasi4').val(data.kwitansi[4].giat)
-			$('.biayaTransportasi4').val(data.kwitansi[4].biaya)
-			$('.jumlahTransportasi4').val(data.kwitansi[4].giat * data.kwitansi[4].biaya )
-			$('.keteranganTransportasi4').val(data.kwitansi[4].keterangan )
-			total_biaya += data.kwitansi[4].giat * data.kwitansi[4].biaya
 
             // Uang Harian
-            $('.rincianUangHarian').val(data.kwitansi[5].rincian)
-			$('.giatUangHarian').val(data.kwitansi[5].giat)
-			$('.biayaUangHarian').val(data.kwitansi[5].biaya)
-			$('.jumlahUangHarian').val(data.kwitansi[5].giat * data.kwitansi[5].biaya )
-			$('.keteranganUangHarian').val(data.kwitansi[5].keterangan )
-			total_biaya += data.kwitansi[5].giat * data.kwitansi[5].biaya
+            $('.rincianUangHarian').val(data.kwitansi[1].rincian)
+			$('.giatUangHarian').val(data.kwitansi[1].giat)
+			$('.biayaUangHarian').val(data.kwitansi[1].biaya)
+			$('.jumlahUangHarian').val(data.kwitansi[1].giat * data.kwitansi[1].biaya )
+			$('.keteranganUangHarian').val(data.kwitansi[1].keterangan )
+			total_biaya += data.kwitansi[1].giat * data.kwitansi[1].biaya
 
-			// Uang Harian
-            $('.rincianUangSaku').val(data.kwitansi[6].rincian)
-			$('.giatUangSaku').val(data.kwitansi[6].giat)
-			$('.biayaUangSaku').val(data.kwitansi[6].biaya)
-			$('.jumlahUangSaku').val(data.kwitansi[6].giat * data.kwitansi[6].biaya )
-			$('.keteranganUangSaku').val(data.kwitansi[6].keterangan )
-			total_biaya += data.kwitansi[6].giat * data.kwitansi[6].biaya
 
 			$('#metodePembayaran').val(data.kwitansi[0].id_pembayaran)
 			var filtered = data.kwitansi.filter(function(value, index, arr){ 
-		        return index > 6;
+		        return index > 1;
 		    });
 
 		   	filtered.forEach(add_other_input)
@@ -355,7 +314,6 @@
         giat = parseInt($(elm).parent().parent().find("[name='giat[]']").val());
         biaya = parseInt($(elm).parent().parent().find("[name='biaya[]']").val());
         jumlah = giat*biaya
-        console.log(jumlah)
         formJumlah = $(elm).parent().parent().find("[name='jumlah[]']").val(jumlah)
         total = kalkulasi_jumlah_total()
         var amount = total;
@@ -365,6 +323,7 @@
         $('#jumlahTotal').html(formatter.format(amount))
 
         amountRill = kalkulasi_jumlah_total_rill()
+        console.log(amountRill)
         $('#jumlahTotalRill').html(formatter.format(amountRill))
     }
 

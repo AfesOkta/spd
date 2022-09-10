@@ -12,15 +12,12 @@
           </button>
       </div>
         <div class="modal-body">
-            <div class="card col-12 mb-3">
-            <div class="card-body">
-                <div class="card-body p-0">
                     @csrf
                     <div class="form-row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="noSpd">Nomor Spd</label>
-                                <input type="text" name="no_spd" id="noSpd" class="form-control" readonly>
+                                <input type="text" name="no_spd" id="noSpd" class="form-control"  readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -49,34 +46,12 @@
                                 <th>Keterangan</th>
                             </tr>
                             <tr class="bg-secondary text-white">
-                                <th colspan="7">Penginapan</th>
-                            </tr>
-                            <tr class="text-center p-0">
-                                <td class="p-1">1</td>
-                                <td class="p-1">
-                                    <input type="text" id="rincianPenginapan" class="form-control" name="rincian[]" value="Biaya Penginapan">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control"  id="giatPenginapan" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
-                                </td>
-                                <td class="p-1">x</td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control"  id="biayaPenginapan" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="biaya[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control" id="jumlahPenginapan" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="jumlah[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control" id="keteranganPenginapan" name="keterangan[]" value=" ">
-                                </td>
-                            </tr>
-                            <tr class="bg-secondary text-white">
                                 <th colspan="7">Transportasi</th>
                             </tr>
                             <tr class="text-center p-0">
                                 <td class="p-1 my-3">2</td>
                                 <td class="p-1 my-3">
-                                    <input type="text" id="asalTujuan" class="form-control mb-0 rincianTransportasi1" name="rincian[]" value="">
+                                    <input type="text" id="asalTujuan" class="form-control mb-0 rincianTransportasi1" name="rincian[]" value="Transportasi Denpasar - Jakarta">
                                 </td>
                                 <td class="p-1 my-3">
                                     <input type="number" class="form-control mb-0 giatTransportasi1" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
@@ -92,70 +67,13 @@
                                     <input type="text" class="form-control mb-0 keteranganTransportasi1" name="keterangan[]" value=" ">
                                 </td>
                             </tr>
-                            <tr class="text-center p-0">
-                                <td class="p-1"> </td>
-                                <td class="p-1">
-                                    <input type="text" id="tujuanAsal" class="form-control mb-0 rincianTransportasi2" name="rincian[]" value="">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 giatTransportasi2" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
-                                </td>
-                                <td class="p-1">x</td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 biayaTransportasi2" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="biaya[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 jumlahTransportasi2" name="jumlah[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control mb-0 keteranganTransportasi2" name="keterangan[]" value=" ">
-                                </td>
-                            </tr>
-                            <tr class="text-center p-0">
-                                <td class="p-1"> </td>
-                                <td class="p-1">
-                                    <input type="text" id="asalBandara" class="form-control mb-0 rincianTransportasi3" name="rincian[]" value="Taxi Denpasar - Bandara PP">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 giatTransportasi3" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
-                                </td>
-                                <td class="p-1">x</td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 biayaTransportasi3" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="biaya[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 jumlahTransportasi3" name="jumlah[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control mb-0 keteranganTransportasi3" name="keterangan[]" value=" ">
-                                </td>
-                            </tr>
-                            <tr class="text-center p-0">
-                                <td class="p-1"> </td>
-                                <td class="p-1">
-                                    <input type="text" id="tujuanBandara" class="form-control mb-0 rincianTransportasi4" name="rincian[]" value="Taxi Kota Tujuan - Bandara PP">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 giatTransportasi4" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
-                                </td>
-                                <td class="p-1">x</td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 biayaTransportasi4" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="biaya[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number" class="form-control mb-0 jumlahTransportasi4" name="jumlah[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control mb-0 keteranganTransportasi4" name="keterangan[]" value=" ">
-                                </td>
-                            </tr>
                             <tr class="bg-secondary text-white">
-                                <th colspan="7">Uang Harian & Saku</th>
+                                <th colspan="7">Uang Harian</th>
                             </tr>
                             <tr class="text-center p-0">
                                 <td class="p-1">3</td>
                                 <td class="p-1">
-                                    <input type="text" class="form-control mb-0 rincianUangHarian" name="rincian[]" value="Uang Harian">
+                                    <input type="text" class="form-control mb-0 rincianUangHarian" name="rincian[]" value="Uang Harian Selama di">
                                 </td>
                                 <td class="p-1">
                                     <input type="number" id="giatUangHarian" class="form-control mb-0 giatUangHarian" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
@@ -169,25 +87,6 @@
                                 </td>
                                 <td class="p-1">
                                     <input type="text" class="form-control mb-0 keteranganUangHarian" name="keterangan[]" value=" ">
-                                </td>
-                            </tr>
-                            <tr class="text-center p-0">
-                                <td class="p-1">4</td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control mb-0 rincianUangSaku" name="rincian[]" value="Uang Saku">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number"  class="form-control mb-0 giatUangSaku" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="giat[]" value="0">
-                                </td>
-                                <td class="p-1">x</td>
-                                <td class="p-1">
-                                    <input type="number"  class="form-control mb-0 biayaUangSaku" onkeyup="kalkulasi_biaya(this)" onchange="kalkulasi_biaya(this)" name="biaya[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="number"  class="form-control mb-0 jumlahUangSaku" name="jumlah[]" value="0">
-                                </td>
-                                <td class="p-1">
-                                    <input type="text" class="form-control mb-0 keteranganUangSaku" name="keterangan[]" value=" ">
                                 </td>
                             </tr>
                             <tr class="bg-secondary text-white">
@@ -216,9 +115,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-            </div>
-            </div>
         </div>
 <div class="modal-footer d-flex flex-row justify-content-between">
     <div class="p-2">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2022 at 01:50 PM
+-- Generation Time: Sep 08, 2022 at 03:58 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -88,7 +88,15 @@ INSERT INTO `kwitansi` (`id_kwitansi`, `no_spd`, `rincian`, `giat`, `biaya`, `ke
 (192, 'SPD/007/VIII/TUK.2.1/2022', 'Taxi Kota Tujuan - Bandara PP', 0, 0, NULL, '1', 1),
 (193, 'SPD/007/VIII/TUK.2.1/2022', 'Uang Harian', 0, 0, NULL, '1', 1),
 (194, 'SPD/007/VIII/TUK.2.1/2022', 'Uang Saku', 0, 0, NULL, '1', 1),
-(195, 'SPD/007/VIII/TUK.2.1/2022', 'jajan', 1, 10000, NULL, '1', 1);
+(195, 'SPD/007/VIII/TUK.2.1/2022', 'jajan', 1, 10000, NULL, '1', 1),
+(225, 'SPDLN/001/IX/TUK.2.1/2022', 'Biaya Penginapan', 1, 1000000, NULL, '2', 1),
+(226, 'SPDLN/001/IX/TUK.2.1/2022', 'Denpasar - Bali -> Bandung', 1, 500000, NULL, '2', 1),
+(227, 'SPDLN/001/IX/TUK.2.1/2022', 'Bandung -> Denpasar - Bali', 0, 0, NULL, '2', 0),
+(228, 'SPDLN/001/IX/TUK.2.1/2022', 'Taxi Denpasar - Bandara PP', 0, 0, NULL, '2', 0),
+(229, 'SPDLN/001/IX/TUK.2.1/2022', 'Taxi Kota Tujuan - Bandara PP', 0, 0, NULL, '2', 0),
+(230, 'SPDLN/001/IX/TUK.2.1/2022', 'Uang Harian', 0, 0, NULL, '2', 0),
+(231, 'SPDLN/001/IX/TUK.2.1/2022', 'Uang Saku', 0, 0, NULL, '2', 0),
+(232, 'SPDLN/001/IX/TUK.2.1/2022', 'asdasd', 2, 200000, NULL, '2', 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +192,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2022_08_20_125141_tujuan_perjalanan', 2),
 (8, '2022_08_22_071927_create_table_pengikut', 3),
 (9, '2022_08_23_125558_create_kwitansi', 4),
-(10, '2022_08_23_133100_create_metode_pembayaran', 5);
+(10, '2022_08_23_133100_create_metode_pembayaran', 5),
+(11, '2022_09_04_213940_add_soft_delete_to_personel', 6);
 
 -- --------------------------------------------------------
 
@@ -335,16 +344,17 @@ CREATE TABLE `personel` (
   `jabatan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_pangkat` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_satker` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id_status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `personel`
 --
 
-INSERT INTO `personel` (`nrp`, `nama_personel`, `jabatan`, `id_pangkat`, `id_satker`, `id_status`) VALUES
-('12345677', 'Jajang', 'Perawat Ahli Madya', '17', '15', '1'),
-('12345678', 'DADANG', 'Ka. UPTD Pkm. Dokter Gigi Ahli Madya', '1', '16', '1');
+INSERT INTO `personel` (`nrp`, `nama_personel`, `jabatan`, `id_pangkat`, `id_satker`, `id_status`, `is_deleted`) VALUES
+('12345677', 'Jajang', 'Perawat Ahli Madya', '17', '15', '1', 0),
+('12345678', 'DADANG', 'Ka. UPTD Pkm. Dokter Gigi Ahli Madya', '1', '16', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -435,7 +445,8 @@ INSERT INTO `spd` (`id_spd`, `no_spd`, `tanggal_spd`, `jenis_spd`, `nrp`, `keper
 (6, 'SPD/003/VIII/TUK.2.1/2022', '22 Agustus 2022', 'PNBP', '12345677', 'asdwsdaasd', 'Denpasar - Bali', '16', '22 August 2022', '23 August 2022', 'Sprin/021/VIII/DIK.2.3./2022', '22 Agustus 2022', '2', 'Perjalanan Dinas'),
 (10, 'SPD/005/VIII/TUK.2.1/2022', '22 Agustus 2022', 'Dukops', '12345677', 'adwdawd', 'Denpasar - Bali', '15', '22 August 2022', '25 August 2022', 'Sprin/111/VIII/DIK.2.3./2022', '26 Agustus 2022', '2', 'Perjalanan Dinas'),
 (14, 'SPD/006/VIII/TUK.2.1/2022', '22 Agustus 2022', 'PNBP', '12345678', 'ASDASD ADS', 'Denpasar - Bali', '4', '22 August 2022', '25 August 2022', 'Sprin/221/VIII/DIK.2.3./2022', '22 Agustus 2022', '2', 'Perjalanan Dinas'),
-(15, 'SPD/007/VIII/TUK.2.1/2022', '23 Agustus 2022', 'Rutin', '12345677', 'asdasdsad', 'Denpasar - Bali', '16', '23 August 2022', '25 August 2022', 'Sprin/11223/VIII/DIK.2.3./2022', '23 Agustus 2022', '2', 'Perjalanan Dinas');
+(15, 'SPD/007/VIII/TUK.2.1/2022', '23 Agustus 2022', 'Rutin', '12345677', 'asdasdsad', 'Denpasar - Bali', '16', '23 August 2022', '25 August 2022', 'Sprin/11223/VIII/DIK.2.3./2022', '23 Agustus 2022', '2', 'Perjalanan Dinas'),
+(16, 'SPDLN/001/IX/TUK.2.1/2022', '08 September 2022', 'Luar Negeri', '12345677', 'test', 'Denpasar - Bali', '21', '08 September 2022', '30 September 2022', 'Sprin/025/IX/DIK.2.3./2022', '08 September 2022', '2', 'Perjalanan Dinas');
 
 -- --------------------------------------------------------
 
@@ -600,7 +611,7 @@ ALTER TABLE `daftar_pengeluaran_ril`
 -- AUTO_INCREMENT for table `kwitansi`
 --
 ALTER TABLE `kwitansi`
-  MODIFY `id_kwitansi` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `id_kwitansi` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- AUTO_INCREMENT for table `metode_pembayaran`
@@ -612,13 +623,13 @@ ALTER TABLE `metode_pembayaran`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pagu`
 --
 ALTER TABLE `pagu`
-  MODIFY `id_pagu` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pagu` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pangkat`
@@ -654,7 +665,7 @@ ALTER TABLE `satker`
 -- AUTO_INCREMENT for table `spd`
 --
 ALTER TABLE `spd`
-  MODIFY `id_spd` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_spd` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `status`
