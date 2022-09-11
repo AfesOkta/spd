@@ -47,19 +47,19 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="formTanggalSpd">Tanggal</label>
-										<input type="text" id="formTanggalSpd" class="form-control datepicker" name="tanggal_spd" required>
+										<input type="text" id="formTanggalSpd" value="{{old('tanggal_spd')}}" class="form-control datepicker" name="tanggal_spd" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="formJenisSpd">Jenis SPD</label>
 										<select type="text" id="formJenisSpd" class="form-control" name="jenis_spd" onchange="toggle_pengikut()">
-											<option value="Rutin">Rutin</option>  <!-- tanpa pengikut -->
-											<option value="Dalam Kota">Dalam Kota</option>
-											<option value="PNBP">PNBP</option>
-											<option value="Dukops">Dukops</option>
-											<option value="Dikbangpes">Dikbangpes</option>
-											<option value="Luar Negeri">Luar Negeri</option> <!-- tanpa pengikut -->
+											<option {{old('tanggal_spd')=='Rutin'?'selected':''}} value="Rutin">Rutin</option>  <!-- tanpa pengikut -->
+											<option {{old('tanggal_spd')=='Dalam Kota'?'selected':''}} value="Dalam Kota">Dalam Kota</option>
+											<option {{old('tanggal_spd')=='PNBP'?'selected':''}} value="PNBP">PNBP</option>
+											<option {{old('tanggal_spd')=='Dukops'?'selected':''}} value="Dukops">Dukops</option>
+											<option {{old('tanggal_spd')=='Dikbangpes'?'selected':''}} value="Dikbangpes">Dikbangpes</option>
+											<option {{old('tanggal_spd')=='Luar Negeri'?'selected':''}} value="Luar Negeri">Luar Negeri</option> <!-- tanpa pengikut -->
 										</select>
 									</div>
 								</div>
@@ -75,7 +75,7 @@
 								<div class="col-6 form-group">
 									<label for="formNRP">NRP</label>
 									<div class="input-group">
-										<input type="number" name="nrp" class="form-control" id="formNRP" value="{{old('nrp')}}" required>
+										<input type="number" name="nrp" class="form-control" id="formNRP"  required>
 										<div class="input-group-append" >
 											<button type="button" 
 											id="btn-search-anggota"
@@ -120,14 +120,19 @@
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
 								<label for="formKeperluan">Keperluan</label>
-								<textarea name="keperluan" id="formKeperluan" class="form-control" required></textarea>
+								<textarea name="keperluan" id="formKeperluan" class="form-control" required>{{old('keperluan')}}</textarea>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="formAsal">Asal SPD</label>
-									<input type="text" name="asal_spd" class="form-control" value="Denpasar - Bali" required>
+									<input 
+									type="text" 
+									name="asal_spd"
+									class="form-control" 
+									value="@if(old('asal_spd')) {{old('asal_spd')}} @else  Denpasar - Bali @endif" 
+									required>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -136,7 +141,7 @@
 									<select name="tujuan_spd" id="formTujuan" class="form-control" required>
 										<option value="" selected disabled>--Pilih Tujuan--</option>
 										@foreach ($tujuan as $row)
-										<option value="{{$row->id_tujuan}}">{{$row->nama_tujuan}}</option>											
+										<option @if(old('tujuan_spd') == $row->id_tujuan) selected @endif  value="{{$row->id_tujuan}}">{{$row->nama_tujuan}}</option>											
 										@endforeach
 									</select>
 								</div>
@@ -161,13 +166,13 @@
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="formBerangkat">Berangkat</label>
-									<input type="text" onchange="calculate_day()" id="formBerangkat" name="tanggal_berangkat" class="form-control datepicker-int"  required>
+									<input type="text" onchange="calculate_day()" id="formBerangkat" name="tanggal_berangkat" value="{{old('tanggal_berangkat')}}" class="form-control datepicker-int"  required>
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="formKembali">Kembali</label>
-									<input type="text" onchange="calculate_day()" id="formKembali" name="tanggal_kembali" class="form-control datepicker-int"  required>
+									<input type="text" onchange="calculate_day()" id="formKembali" name="tanggal_kembali" value="{{old('tanggal_kembali')}}" class="form-control datepicker-int"  required>
 								</div>
 							</div>
 						</div>
@@ -184,13 +189,14 @@
 								<div class="form-group">
 									<label for="formSprin">Nomor Sprin</label>
 
-									<input type="text" id="formSprin" name="no_sprin" class="form-control" value="Sprin/    /{{$m[date('m')]}}/DIK.2.3./{{date('Y')}}" required>
+									<input type="text" id="formSprin" name="no_sprin" class="form-control" 
+									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /{{$m[date('m')]}}/DIK.2.3./{{date('Y')}}@endif" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="formTglSprin">Tanggal Sprin</label>
-									<input type="text" id="formTglSprin" name="tanggal_sprin" class="form-control datepicker" value="" required>
+									<input type="text" id="formTglSprin" name="tanggal_sprin" class="form-control datepicker" value="@if(old('tanggal_sprin')) {{old('tanggal_sprin')}} @endif" required>
 								</div>
 							</div>
 						</div>
@@ -211,7 +217,7 @@
 										<select name="mata_anggaran" id="formMataAnggaran" class="form-control" onchange="replace_ket_mata_anggaran()" required>
 											<option selected disabled>--Pilih Mata Anggaran --</option>
 											@foreach ($pagu as $row)
-											<option value="{{$row->id_pagu}}">{{$row->akun}}</option>
+											<option @if(old('mata_anggaran')== $row->id_pagu) selected @endif() value="{{$row->id_pagu}}">{{$row->akun}}</option>
 											@endforeach
 										</select>
 										<div class="input-group-append">
@@ -230,7 +236,7 @@
 					</div>
 				</div>
 
-				<div class="card mb-2" id="formPengikut">
+				<div class="card mb-2 hidden" id="formPengikut">
 					<div class="card-header d-flex flex-row justify-content-between">
 						<h4>Pengikut</h4>
 						<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-primary btn-sm mb-2 float-right">Tambah</button>
@@ -242,6 +248,7 @@
 								<th>Nama</th>
 								<th>NRP</th>
 								<th>Pangkat/Golongan</th>
+								<th>Jabatan</th>
 								<th>Lama</th>
 								<th>Aksi</th>
 							</tr>

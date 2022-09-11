@@ -92,7 +92,7 @@ class SpdController extends Controller
                 Pengikut::create($pengikut);
             }
         }
-        return redirect()->back()->with('msg-success', 'Data berhasil dirubah');
+        return redirect()->back()->with('msg-success', 'Data berhasil dirubah')->withInput();
     }
 
     public function delete_spd($id){

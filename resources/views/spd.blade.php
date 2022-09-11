@@ -167,6 +167,7 @@
 							<th>#</th>
 							<th>Nama</th>
 							<th>NRP/Pangkat</th>
+							<th>Jabatan</th>
 							<th>Satker</th>
 							<th>Add</th>
 						</tr>
@@ -180,6 +181,7 @@
 							<td>{{$n++}}</td>
 							<td>{{$anggota->nama_personel}}</td>
 							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
+							<td>{{$anggota->jabatan}}</td>
 							<td>{{$anggota->satker->nama_satker}}</td>
 							<td>
 								<button class="btn btn-primary btn-xs" data-dismiss="modal" onclick="addPengikut('{{$anggota->nrp}}')"><i class="fa fa-user-plus"></i></button>
@@ -249,6 +251,7 @@
 							"<td>"+data.nama_personel+"</td>"+
 							"<td>"+data.nrp+"</td>"+
 							"<td>"+data.pangkat.nama_pangkat+" / "+data.pangkat.golongan+"</td>"+
+							"<td>"+data.jabatan+"</td>"+
 							"<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>"+
 							"<input type='text' name='nrp_pengikut[]' value='"+nrp+"' hidden required>"+
 							"</td>"+
@@ -291,6 +294,7 @@
 			$('#formPengikut').show();
 		}
 	}
+	toggle_pengikut();
 
 	function calculate_day(){
 		let start = $('#formBerangkat').val();
@@ -319,5 +323,8 @@
 	$('#modal-search-anggota').on('hidden.bs.modal', function(){
 		$('body').addClass('modal-open')
 	})
+
+	calculate_day();
+	replace_ket_mata_anggaran();
 </script>
 @endsection
