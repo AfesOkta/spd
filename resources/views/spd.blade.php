@@ -102,102 +102,40 @@
 @section('extra-modal')
 <!-- Modal -->
 <div class="modal fade" id="modal-search-anggota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      	<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLabel">Tambah Anggota</h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          		<span aria-hidden="true">&times;</span>
-        	</button>
-      	</div>
-      	<div class="modal-body">
-				<div class="table-responsive">
-				<table class="table table-bordered table-hover datatable-search-anggota">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Nama</th>
-							<th>NRP/Pangkat</th>
-							<th>Satker</th>
-							<th>Add</th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-						$n=1;
-						@endphp
-						@foreach ($personel as $anggota)
-						<tr>
-							<td>{{$n++}}</td>
-							<td>{{$anggota->nama_personel}}</td>
-							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
-							<td>{{$anggota->satker->nama_satker}}</td>
-							<td>
-								<button class="btn btn-primary btn-xs" data-dismiss="modal" onclick="addAnggota('{{$anggota->nrp}}')"><i class="fa fa-user-plus"></i></button>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-				</div>
-    	</div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-    </div>
-  </div>
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Tambah Anggota</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+<livewire:modal-add-anggota></livewire:modal-add-anggota>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-primary">Save changes</button>
 </div>
-
+</div>
+</div>
+</div>
 <!-- Modal Pengikut -->
 <div class="modal fade" id="modal-search-pengikut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      	<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLabel">Tambah Pengikut</h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          		<span aria-hidden="true">&times;</span>
-        	</button>
-      	</div>
-      	<div class="modal-body">
-				<div class="table-responsive">
-				<table class="table table-bordered table-hover datatable-search-anggota">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Nama</th>
-							<th>NRP/Pangkat</th>
-							<th>Jabatan</th>
-							<th>Satker</th>
-							<th>Add</th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-						$n=1;
-						@endphp
-						@foreach ($personel as $anggota)
-						<tr>
-							<td>{{$n++}}</td>
-							<td>{{$anggota->nama_personel}}</td>
-							<td>{{$anggota->nrp}}/{{$anggota->pangkat->nama_pangkat}}</td>
-							<td>{{$anggota->jabatan}}</td>
-							<td>{{$anggota->satker->nama_satker}}</td>
-							<td>
-								<button class="btn btn-primary btn-xs" data-dismiss="modal" onclick="addPengikut('{{$anggota->nrp}}')"><i class="fa fa-user-plus"></i></button>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-				</div>
-    	</div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-    </div>
-  </div>
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Tambah Pengikut</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+<livewire:modal-add-pengikut></livewire:modal-add-pengikut>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-primary">Save changes</button>
+</div>
+</div>
+</div>
 </div>
 @endsection
 @section('extra-js')

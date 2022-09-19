@@ -62,6 +62,8 @@ Route::get('/get_personel_data', [PersonelController::class, 'get_personel_data'
 Route::post('/add_personel', [PersonelController::class, 'add_personel'])->name('add-personel');
 Route::post('/edit_personel', [PersonelController::class, 'edit_personel'])->name('edit-personel');
 Route::get('/delete_personel/{nrp}', [PersonelController::class, 'delete_personel'])->name('delete-personel');
+Route::get('/personel_import', [PersonelController::class, 'import'])->name('import-personel');
+Route::post('/do_personel_import', [PersonelController::class, 'do_import'])->name('do-import-personel');
 
 // Pejabat
 Route::get('/pejabat', [PejabatController::class, 'index'])->name('pejabat');

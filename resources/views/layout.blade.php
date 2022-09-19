@@ -39,6 +39,7 @@
 
         
     </style>
+    @livewireStyles
 </head>
 <body>
 @yield('modal') 
@@ -78,8 +79,16 @@
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-    var tabelAnggota = $('.datatable-search-anggota').DataTable();
-    var table = $('.datatable').DataTable();
+    var tabelAnggota = $('.datatable-search-anggota').DataTable({
+        "columnDefs": [
+            { "type": "html", "targets": 1 }
+        ]
+    });
+    var table = $('.datatable').DataTable({
+        "columnDefs": [
+            { "type": "string", "targets": 1 }
+        ]
+    });
     $('.datepicker').datepicker({
         dateFormat: 'dd MM yy',
         monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
@@ -102,6 +111,8 @@
     toastr.error('{{session('msg-error')}}')
     @endif
 </script>
-@yield('extra-js')
+@yield('extra-js') 
+
+@livewireScripts
 </body>
 </html>

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('personel', function (Blueprint $table) {
             $table->string('nrp', 10)->primary();
-            $table->string('nama_personel', 50);
-            $table->string('jabatan', 50);
+            $table->string('nama_personel', 100);
+            $table->string('jabatan', 255);
             $table->string('id_pangkat', 10);  // fk
             $table->string('id_satker', 10);   // fk
             $table->string('id_status', 10);   // fk
