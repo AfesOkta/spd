@@ -25,7 +25,9 @@
 <div class="card col-12">
 	<div class="card-header d-flex flex-row justify-content-between">
 		<h4>Data SPD</h4>
-		<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalAddSPD">Tambah SPD</button>
+		<button class="btn btn-sm btn-primary float-left" data-toggle="modal" data-target="#modalAddSPD">Tambah SPD</button>
+        <button class="btn btn-sm btn-primary float-left" data-toggle="modal" data-target="#modalAddSPD">Edit SPD</button>
+        <button class="btn btn-sm btn-primary float-left" data-toggle="modal" data-target="#modalAddSPD">Delete SPD</button>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -38,7 +40,7 @@
 						<th class="text-sm p-2 text-center m-0">Keterangan</th>
 						<th class="text-sm p-2 text-center m-0">Waktu</th>
 						<th class="text-sm p-2 text-center m-0">Pengikut</th>
-						<th class="text-sm p-2 text-center m-0">Aksi</th>
+						<th class="text-sm p-2 text-center m-0">Pembayaran</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,8 +63,10 @@
 								Pangkat/Golongan: {{$row->personel->pangkat->nama_pangkat}} / {{$row->personel->pangkat->golongan}}
 							</td>
 							<td class="text-xxs p-2 m-0">
-								{{$row->jenis_pengeluaran}} / 
-								{{$row->keperluan}}
+								{{$row->jenis_pengeluaran}} /
+								{{$row->keperluan}} <br/>
+                                {{$row->tujuan->nama_tujuan}} <br/>
+                                {{$row->akuns->akun}} - {{$row->akuns->ket}}
 							</td>
 							<td class="text-xxs p-2 m-0">
 								@php
@@ -80,7 +84,17 @@
 								</button>
 							</td>
 							<td class="text-xxs p-2 m-0" nowrap>
-								<button class="btn btn-sm btn-primary m-1">
+                                @php
+                                    $ii = 1;
+                                @endphp
+                                <ul>
+                                @foreach ($row->kwitansi as $item)
+                                    <li>{{$item->metode->pembayaran}} -
+                                        {{$item->rincian}} -
+                                        {{$item->biaya}}</li>
+                                @endforeach
+                                </ul>
+								{{-- <button class="btn btn-sm btn-primary m-1">
 									<i class="fa fa-eye"></i>
 								</button>
 								<button class="btn btn-sm btn-primary m-1" data-toggle="modal" data-target="#modalAddSPD" onClick="edit('{{$row->id_spd}}')">
@@ -88,7 +102,7 @@
 								</button>
 								<a class="btn btn-sm btn-primary m-1" href="{{route('delete-spd', ['id'=>$row->id_spd])}}" onclick="return confirm('Hapus SPD?')">
 									<i class="fa fa-trash"></i>
-								</a>
+								</a> --}}
 							</td>
 						</tr>
 					@endforeach

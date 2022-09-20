@@ -40,4 +40,7 @@ class Spd extends Model
     public function tujuan(){
         return $this->hasOne(Tujuan::class, 'id_tujuan', 'tujuan_spd');
     }
+    public function akuns(){
+        return $this->hasOne(Pagu::class, 'id_pagu','mata_anggaran');
+    }
 }
