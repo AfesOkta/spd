@@ -98,7 +98,7 @@ $m = ['01' => 'I', '02' => 'II', '03' => 'III', '04' => 'IV', '05' => 'V', '06' 
                                         $totalBiaya = 0;
                                         $ketBayar = "";
                                     @endphp
-                                    @foreach ($row->kwitansi as $item)                                       
+                                    @foreach ($row->kwitansi as $item)
                                         @php
                                             $ketBayar = $item->metode->pembayaran;
                                             $totalBiaya = $totalBiaya + $item->biaya;
@@ -106,7 +106,7 @@ $m = ['01' => 'I', '02' => 'II', '03' => 'III', '04' => 'IV', '05' => 'V', '06' 
                                     @endforeach
                                     @if($ketBayar != "")
                                         {{$ketBayar}} - {{number_format($totalBiaya,2,",",".")}}
-                                    @endif                                    
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -208,22 +208,35 @@ $m = ['01' => 'I', '02' => 'II', '03' => 'III', '04' => 'IV', '05' => 'V', '06' 
         }
 
         function addPengikut(nrp) {
+            var rowCount = $("#daftarPengikut tr").length;
+            if(rowCount >= 14){
+                alert('Tidak dapat menambah pengikut kembali');
+                return false;
+            }
             $.get("{{ route('get-personel-data') }}", {
                 nrp: nrp
             }, function(data) {
                 data = JSON.parse(data)
                 console.log(data);
+                var exists = !! ~ document.getElementById('daftarPengikut').innerHTML.indexOf(nrp);
+                if(!exists) {
                 dataPengikut = "<tr>" +
-                    "<td>" + data.nama_personel + "</td>" +
-                    "<td>" + data.nrp + "</td>" +
-                    "<td>" + data.pangkat.nama_pangkat + " / " + data.pangkat.golongan + "</td>" +
-                    "<td>" + data.jabatan + "</td>" +
-                    "<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>" +
-                    "<input type='text' name='nrp_pengikut[]' value='" + nrp + "' hidden required>" +
-                    "</td>" +
-                    "<td><button type='button' class='btn btn-sm btn-danger' onclick='deletePengikut(this)'>x</button></td>" +
-                    "</tr>";
-                $('#daftarPengikut').append(dataPengikut)
+                        "<td>" + data.nama_personel + "</td>" +
+                        "<td>" + data.nrp + "</td>" +
+                        "<td>" + data.pangkat.nama_pangkat + " / " + data.pangkat.golongan + "</td>" +
+                        "<td>" + data.jabatan + "</td>" +
+                        "<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>" +
+                        "<input type='text' name='nrp_pengikut[]' value='" + nrp + "' hidden required>" +
+                        "</td>" +
+                        "<td><button type='button' class='btn btn-sm btn-danger' onclick='deletePengikut(this)'>x</button></td>" +
+                        "</tr>";
+                    $('#daftarPengikut').append(dataPengikut)
+                }else{
+                    alert('Data pengikut telah terdaftar');
+                    return false;
+                }
+                return true;
+                
             });
         }
 

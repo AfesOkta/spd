@@ -203,7 +203,7 @@
 									<label for="formSprin">Nomor Sprin</label>
 
 									<input type="text" id="formSprin" name="no_sprin" class="form-control" 
-									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /{{$m[date('m')]}}/DIK.2.3./{{date('Y')}}@endif" required>
+									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /    /    /{{date('Y')}}@endif" required>
 								</div>
 							</div>
 							<div class="col-md-6">
