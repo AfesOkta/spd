@@ -40,6 +40,7 @@
         
     </style>
     @livewireStyles
+    @yield('styles')
 </head>
 <body>
 @yield('modal') 
