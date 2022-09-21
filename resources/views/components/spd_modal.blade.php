@@ -4,21 +4,21 @@
     .card-header {
         height: 2.5rem;
     }
-    .card-body {    
+    .card-body {
         padding: 0.3rem;
     }
-    .modal-body {        
+    .modal-body {
         padding: 0.25rem;
     }
 </style>
 @endsection
 <!-- Modal -->
-<form action="{{route('add-spd')}}" method="POST"> 
+<form action="{{route('add-spd')}}" method="POST">
 	<div class="modal fade" id="modalAddSPD" tabindex="-1" aria-labelledby="modalAddSPDLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modalAddSPDLabel">Tambah Personel</h5>
+					<h5 class="modal-title" id="modalAddSPDLabel">Tambah SPD</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -38,8 +38,8 @@
 									<div class="input-group mb-3">
 
 										<div class="input-group-prepend">
-											<input type="text" 
-											class="form-control input-sm" 
+											<input type="text"
+											class="form-control input-sm"
 											value="SPD/"
 											id="nmrSpd"
 											size="5" />
@@ -90,11 +90,11 @@
 									<div class="input-group">
 										<input type="number" name="nrp" class="form-control" id="formNRP"  required>
 										<div class="input-group-append" >
-											<button type="button" 
+											<button type="button"
 											id="btn-search-anggota"
 											class="btn btn-secondary" onclick="searchAnggota()"><i class="fa fa-search" ></i></button>
 											<button
-											type="button" 
+											type="button"
 											class="btn btn-secondary" data-target="#modal-search-anggota" data-toggle="modal">
 											<i class="fa fa-book"></i>
 										</button>
@@ -140,11 +140,11 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="formAsal">Asal SPD</label>
-									<input 
-									type="text" 
+									<input
+									type="text"
 									name="asal_spd"
-									class="form-control" 
-									value="@if(old('asal_spd')) {{old('asal_spd')}} @else  Denpasar - Bali @endif" 
+									class="form-control"
+									value="@if(old('asal_spd')) {{old('asal_spd')}} @else  Denpasar - Bali @endif"
 									required>
 								</div>
 							</div>
@@ -154,7 +154,7 @@
 									<select name="tujuan_spd" id="formTujuan" class="form-control" required>
 										<option value="" selected disabled>--Pilih Tujuan--</option>
 										@foreach ($tujuan as $row)
-										<option @if(old('tujuan_spd') == $row->id_tujuan) selected @endif  value="{{$row->id_tujuan}}">{{$row->nama_tujuan}}</option>											
+										<option @if(old('tujuan_spd') == $row->id_tujuan) selected @endif  value="{{$row->id_tujuan}}">{{$row->nama_tujuan}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -202,7 +202,7 @@
 								<div class="form-group">
 									<label for="formSprin">Nomor Sprin</label>
 
-									<input type="text" id="formSprin" name="no_sprin" class="form-control" 
+									<input type="text" id="formSprin" name="no_sprin" class="form-control"
 									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /    /    /{{date('Y')}}@endif" required>
 								</div>
 							</div>
@@ -276,10 +276,10 @@
 			</div>
 			<div class="modal-footer d-flex flex-row justify-content-between">
 
-				<a 
+				<a
 				class="btn btn-sm text-danger"
-				onclick="return confirm('Hapus Spd?')" 
-				id="deleteSpdBtn" 
+				onclick="return confirm('Hapus Spd?')"
+				id="deleteSpdBtn"
 				href="">Hapus</a>
 				<div class="btn-group">
 					<button type="submit" class=" btn btn-success">Simpan</button>
