@@ -23,8 +23,10 @@ class SpdController extends Controller
             $no_spd = '001';
         }
         // dd($no_spd);
+        $spd = Spd::with('kwitansi')->orderBy('id_spd', 'desc')->get();
+        // dd($spd->toArray());
         $data = [
-            'spd'=>Spd::orderBy('id_spd', 'desc')->get(),
+            'spd'=>$spd,
             'personel'=>Personel::get(),
             'tujuan'=>Tujuan::get(),
             'pagu'=>Pagu::get(),
@@ -53,7 +55,7 @@ class SpdController extends Controller
     }
 
     public function add_spd(Request $request){
-        
+
         $valid_input = $request->validate([
             'id_spd' => 'nullable',
             'no_spd' => 'required',
@@ -72,7 +74,7 @@ class SpdController extends Controller
 
         ]);
 
-        // create no spd 
+        // create no spd
         $m = ['01'=>'I','02'=>'II', '03'=>'III', '04'=>'IV', '05'=>'V', '06'=>'VI', '07'=>'VII', '08'=>'VIII', '09'=>'IX', '10'=>'X', '11'=>'XI', '12'=>'XII',];
         if($valid_input['jenis_spd'] == 'Luar Negeri'){
             $valid_input['no_spd'] = 'SPDLN/'. $valid_input['no_spd'].'/'.$m[date('m')].'/TUK.2.1/'.date('Y');

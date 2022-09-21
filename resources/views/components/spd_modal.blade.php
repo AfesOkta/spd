@@ -1,4 +1,17 @@
 @section('modal')
+@section('styles')
+<style>
+    .card-header {
+        height: 2.5rem;
+    }
+    .card-body {    
+        padding: 0.3rem;
+    }
+    .modal-body {        
+        padding: 0.25rem;
+    }
+</style>
+@endsection
 <!-- Modal -->
 <form action="{{route('add-spd')}}" method="POST"> 
 	<div class="modal fade" id="modalAddSPD" tabindex="-1" aria-labelledby="modalAddSPDLabel" aria-hidden="true">
@@ -14,7 +27,7 @@
 
 					@csrf
 
-					<div class="card mb-2">
+					<div class="card mb-1">
 						<div class="card-header">
 							<h4>SPD</h4>
 						</div>
@@ -66,7 +79,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="card mb-2">
+					<div class="card mb-1">
 						<div class="card-header">
 							<h4>Anggota</h4>
 						</div>
@@ -112,13 +125,13 @@
 				</div>
 
 
-				<div class="card mb-2">
+				<div class="card mb-1">
 					<div class="card-header">
 						<h4>Keterangan</h4>
 					</div>
 					<div class="card-body">
 						<div class="form-row">
-							<div class="col-md-12 mb-2">
+							<div class="col-md-12 mb-1">
 								<label for="formKeperluan">Keperluan</label>
 								<textarea name="keperluan" id="formKeperluan" class="form-control" required>{{old('keperluan')}}</textarea>
 							</div>
@@ -151,7 +164,7 @@
 				</div>
 
 
-				<div class="card mb-2">
+				<div class="card mb-1">
 					<div class="card-header">
 						<h4>Waktu</h4>
 					</div>
@@ -179,7 +192,7 @@
 					</div>
 				</div>
 
-				<div class="card mb-2">
+				<div class="card mb-1">
 					<div class="card-header">
 						<h4>Sprin</h4>
 					</div>
@@ -190,7 +203,7 @@
 									<label for="formSprin">Nomor Sprin</label>
 
 									<input type="text" id="formSprin" name="no_sprin" class="form-control" 
-									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /{{$m[date('m')]}}/DIK.2.3./{{date('Y')}}@endif" required>
+									value="@if(old('no_sprin')) {{old('no_sprin')}} @else Sprin/    /    /    /{{date('Y')}}@endif" required>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -204,7 +217,7 @@
 				</div>
 
 
-				<div class="card mb-2">
+				<div class="card mb-1">
 					<div class="card-header">
 						<h4>Keuangan</h4>
 					</div>
@@ -236,10 +249,10 @@
 					</div>
 				</div>
 
-				<div class="card mb-2 hidden" id="formPengikut">
+				<div class="card mb-1 hidden" id="formPengikut">
 					<div class="card-header d-flex flex-row justify-content-between">
 						<h4>Pengikut</h4>
-						<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-primary btn-sm mb-2 float-right">Tambah</button>
+						<button data-target="#modal-search-pengikut" type="button" data-toggle="modal" class="btn btn-primary btn-sm mb-1 float-right">Tambah</button>
 					</div>
 					<div class="card-body">
 						<table class="table table-hover" style="width: 100%;">

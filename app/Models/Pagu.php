@@ -19,4 +19,5 @@ class Pagu extends Model
     ];
     protected $primaryKey = 'id_pagu';
     public $timestamps = false;
+
 }
