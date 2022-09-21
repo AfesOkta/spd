@@ -76,31 +76,31 @@
 					<td class="text-center">
 						@if($row->jenis_spd == "Rutin")
 							@if($row->kwitansi->count() > 0)
-							<button class="btn btn-sm btn-warning text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+							<button class="btn btn-sm btn-warning text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi">
 								<i class="fa fa-file"></i>
 							</button>
 							@else
-							<button class="btn btn-sm btn-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+							<button class="btn btn-sm btn-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi">
 								<i class="fa fa-plus"></i>
 							</button>
 							@endif
 						@elseif($row->jenis_spd == "Luar Negeri")
 							@if($row->kwitansi->count() > 0)
-								<button class="btn btn-sm btn-danger text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+								<button class="btn btn-sm btn-danger text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi LN">
 									<i class="fa fa-file"></i>
 								</button>
 							@else
-								<button class="btn btn-sm btn-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+								<button class="btn btn-sm btn-success mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi LN">
 									<i class="fa fa-plus"></i>
 								</button>
 							@endif
 						@else
 							@if($row->kwitansi->count() > 0)
-								<button class="btn btn-sm btn-success text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+								<button class="btn btn-sm btn-success text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Nominatif">
 									<i class="fa fa-file"></i>
 								</button>
 							@else
-								<button class="btn btn-sm btn-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi">
+								<button class="btn btn-sm btn-outline-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Nominatif">
 									<i class="fa fa-plus"></i>
 								</button>
 							@endif
@@ -131,8 +131,7 @@
 	function fill_add_kwitansi(no_spd) {
 
 		// do ajax request
-		$.get('{{route('
-			get - kwitansi - data ')}}', {
+		$.get('{{route("get-kwitansi-data")}}', {
 				no_spd: no_spd
 			},
 			function(data) {
@@ -157,8 +156,7 @@
 		total_biaya = 0;
 		$('#form-lain-lain').html('')
 		// do ajax request
-		$.get('{{route('
-			get - kwitansi - data ')}}', {
+		$.get('{{route("get-kwitansi-data")}}', {
 				no_spd: no_spd
 			},
 			function(data) {
@@ -251,8 +249,7 @@
 		$('#form-lain-lain-rill').html('')
 		// do ajax request
 		let no_spd = $('#noSpd').val();
-		$.get('{{route('
-			get - kwitansi - data ')}}', {
+		$.get('{{route("get-kwitansi-data")}}', {
 				no_spd: no_spd
 			},
 			function(data) {
