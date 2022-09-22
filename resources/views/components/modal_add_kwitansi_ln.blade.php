@@ -2,11 +2,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalAddKwitansi" tabindex="-1" aria-labelledby="modalAddKwitansiLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddKwitansiLn" tabindex="-1" aria-labelledby="modalAddKwitansiLnLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-            <h5 class="modal-title" id="modalAddKwitansiLabel">Tambah Kwitansi Luar Negeri</h5>
+            <h5 class="modal-title" id="modalAddKwitansiLnLabel">Tambah Kwitansi Luar Negeri</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -17,20 +17,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="noSpd">Nomor Spd</label>
-                                <input type="text" name="no_spd" id="noSpd" class="form-control"  readonly>
+                                <input type="text" name="no_spd" id="noSpdLn" class="form-control"  readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="noSpd">Pelaksana</label>
-                                <input type="text" id="namaPelaksana" class="form-control" readonly>
+                                <input type="text" id="namaPelaksanaLn" class="form-control" readonly>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="noSpd">Pangkat/Nrp</label>
-                                <input type="text"  id="pangkatNrp" class="form-control" readonly>
+                                <input type="text"  id="pangkatNrpLn" class="form-control" readonly>
                             </div>
                         </div>
                     </div>

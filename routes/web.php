@@ -103,3 +103,5 @@ Route::get('/get_kwitansi_rill', [KwrilController::class, 'get_kwitansi_data'])-
 Route::post('/add_kwitansi_rill', [KwrilController::class, 'add_kwitansi'])->name('add-kwitansi-rill');
 Route::get('/delete_kwitansi_rill/{id}', [KwrilController::class, 'delete_kwitansi'])->name('delete-kwitansi-rill');
 
+// Nominatif
+Route::post('/add_nominatif', [KwitansiLnController::class, 'add_nominatif'])->name('add-nominatif');

@@ -86,21 +86,21 @@
 							@endif
 						@elseif($row->jenis_spd == "Luar Negeri")
 							@if($row->kwitansi->count() > 0)
-								<button class="btn btn-sm btn-danger text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi LN">
+								<button class="btn btn-sm btn-danger text-white mx-auto" onclick="fill_edit_kwitansi_ln('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansiLn" title="Add Kwitansi LN">
 									<i class="fa fa-file"></i>
 								</button>
 							@else
-								<button class="btn btn-sm btn-success mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Kwitansi LN">
+								<button class="btn btn-sm btn-success mx-auto" onclick="fill_add_kwitansi_ln('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansiLn" title="Add Kwitansi LN">
 									<i class="fa fa-plus"></i>
 								</button>
 							@endif
 						@else
 							@if($row->kwitansi->count() > 0)
-								<button class="btn btn-sm btn-success text-white mx-auto" onclick="fill_edit_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Nominatif">
+								<button class="btn btn-sm btn-success text-white mx-auto" onclick="fill_edit_nominatif('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddNominatif" title="Add Nominatif">
 									<i class="fa fa-file"></i>
 								</button>
 							@else
-								<button class="btn btn-sm btn-outline-primary mx-auto" onclick="fill_add_kwitansi('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddKwitansi" title="Add Nominatif">
+								<button class="btn btn-sm btn-outline-primary mx-auto" onclick="fill_add_nominatif('{{$row->no_spd}}')" data-toggle="modal" data-target="#modalAddNominatif" title="Add Nominatif">
 									<i class="fa fa-plus"></i>
 								</button>
 							@endif
@@ -117,6 +117,8 @@
 @section('extra-js')
 @include('components.modal_pengeluaran_rill')
 @include('components.modal_add_kwitansi')
+@include('components.modal_add_kwitansi_ln')
+@include('components.modal_add_nominatif')
 
 <script>
 	function calculate_day(start, end) {
@@ -143,6 +145,46 @@
 				$('#asalTujuan').val(data.spd.asal_spd + ' -> ' + data.tujuan.nama_tujuan)
 				$('#tujuanAsal').val(data.tujuan.nama_tujuan + ' -> ' + data.spd.asal_spd)
 
+				// uang Harian
+				lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
+				$('#giatUangHarian').val('0')
+				$('#biayaUangHarian').val('0')
+				$('#jumlahUangHarian').val('0')
+			});
+	}
+
+	function fill_add_kwitansi_ln(no_spd) {
+		// do ajax request
+		$.get('{{route("get-kwitansi-data")}}', {
+				no_spd: no_spd
+			},
+			function(data) {
+				$('#noSpdLn').val(no_spd)
+				$('#namaPelaksanaLn').val(data.personel.nama_personel)
+				$('#pangkatNrpLn').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
+				
+				// uang Harian
+				lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
+				$('#giatUangHarian').val('0')
+				$('#biayaUangHarian').val('0')
+				$('#jumlahUangHarian').val('0')
+			});
+	}
+
+	function fill_add_nominatif(no_spd) {
+		// do ajax request
+		$.get('{{route("get-kwitansi-data")}}', {
+				no_spd: no_spd
+			},
+			function(data) {
+				$('#noSpdNm').val(no_spd)
+				$('#namaPelaksanaNm').val(data.personel.nama_personel)
+				$('#pangkatNrpNm').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
+
+				$('#jnsSpd').val(data.spd.jenis_spd)
+				$('#tujuanSPD').val(data.tujuan.nama_tujuan)
+				$('#nominalSpd').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
+				
 				// uang Harian
 				lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
 				$('#giatUangHarian').val('0')
@@ -243,7 +285,6 @@
 			});
 	}
 
-
 	function fill_edit_rill() {
 		total_biaya = 0;
 		$('#form-lain-lain-rill').html('')
@@ -274,9 +315,6 @@
 			});
 
 	}
-
-
-
 
 	function add_rill_input(value, index, arr) {
 		console.log(value)
@@ -345,7 +383,6 @@
 			" </tr>"
 		$('#form-lain-lain').append(new_form)
 	}
-
 
 	var jumlah_uang = 0
 

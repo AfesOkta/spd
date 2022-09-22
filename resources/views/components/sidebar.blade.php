@@ -78,19 +78,8 @@
                         Kwitansi
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('kwitansi_ln')}}" class="@yield('kwitansiln-menu')">
-                        <i class="metismenu-icon fa fa-file-lines"></i>
-                        Kwitansi LN
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="metismenu-icon fa fa-file-lines"></i>
-                        Nominatif
-                    </a>
-                </li>
-                <li class="app-sidebar__heading">Other</li>
+                
+                <li class="app-sidebar__heading">LAPORAN</li>
 
                 <li>
                     <a href="#">
