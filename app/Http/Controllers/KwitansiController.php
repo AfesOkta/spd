@@ -43,6 +43,7 @@ class KwitansiController extends Controller
         $data['personel'] = $data['spd']->personel;
         $data['tujuan'] = $data['spd']->tujuan;
         $data['pangkat'] = $data['spd']->personel->pangkat;
+        $data['pengikut'] = $data['spd']->pengikut;
         return response()->json($data);
     }
 

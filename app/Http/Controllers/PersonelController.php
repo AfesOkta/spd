@@ -11,6 +11,7 @@ use App\Models\Personel;
 use App\Models\Spd;
 use App\Models\Kwitansi;
 use App\Models\Kwril;
+use App\Models\Pengikut;
 use Illuminate\Support\Facades\Storage;
 class PersonelController extends Controller
 {
@@ -31,12 +32,20 @@ class PersonelController extends Controller
         $res->status = $data->status;
         return response()->json($res->toJson());
     }
+
+    public function get_pengikut_data(Request $request){
+        $nrp = $request->input('nrp');
+
+        $data = Pengikut::whereNrp($nrp)->get();
+        $res = $data;
+        return response()->json($res->toJson());
+    }
     public function add_personel(Request $request){
         $valid_input = $request->validate([
-            'nama_personel'=> 'required',  
-            'jabatan'=> 'nullable',  
+            'nama_personel'=> 'required',
+            'jabatan'=> 'nullable',
             'id_pangkat'=> 'required',
-            'id_satker'=> 'required',  
+            'id_satker'=> 'required',
             'id_status'=>'required'
         ]);
         $valid_input['is_deleted'] = 0;
@@ -46,9 +55,9 @@ class PersonelController extends Controller
         return redirect()->back()->with('msg-success', 'Data berhasil dirubah');
     }
 
-    
+
     public function delete_personel($nrp){
-        
+
 
         $data = Personel::where('nrp', $nrp)->update(['is_deleted'=>1]);
         if($data){
@@ -56,7 +65,7 @@ class PersonelController extends Controller
         } else{
             return redirect()->route('personel')->with('msg-error', 'Data gagal dihapus');
         }
-    }    
+    }
 
     public function import(){
         return view('import_personel');
@@ -69,20 +78,20 @@ class PersonelController extends Controller
         $csvFile = fopen('storage/personel.csv', 'r');
         $data = fgetcsv($csvFile, 2000, ";");
         while (($data = fgetcsv($csvFile, 2000, ";")) !== FALSE) {
-            
+
         //     // nrp0; nama1; pangkat2; golongan3; jabatan4; satker5; status6
             $nrp = $data[0];
             $pangkat = Pangkat::where('nama_pangkat', $data[2])->get()[0]->id_pangkat;
             $golongan = $pangkat;
             $personel = [
-                'nama_personel'=> $data[1],  
-                'jabatan'=> $data[4],  
+                'nama_personel'=> $data[1],
+                'jabatan'=> $data[4],
                 'id_pangkat'=> $pangkat,
-                'id_satker'=> $golongan,  
+                'id_satker'=> $golongan,
                 'id_status'=> Status::where('nama_status', $data[6])->get()[0]->id_status,
                 'is_deleted'=>0
             ];
-            
+
             // upsert
             Personel::updateOrCreate(['nrp'=>$nrp], $personel);
         }

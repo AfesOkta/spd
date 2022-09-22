@@ -162,7 +162,7 @@
 				$('#noSpdLn').val(no_spd)
 				$('#namaPelaksanaLn').val(data.personel.nama_personel)
 				$('#pangkatNrpLn').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
-				
+
 				// uang Harian
 				lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
 				$('#giatUangHarian').val('0')
@@ -184,12 +184,18 @@
 				$('#jnsSpd').val(data.spd.jenis_spd)
 				$('#tujuanSPD').val(data.tujuan.nama_tujuan)
 				$('#nominalSpd').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
-				
+
 				// uang Harian
-				lama_giat = calculate_day(data.tanggal_berangkat, data.tanggal_kembali)
+				lama_giat = calculate_day(data.spd.tanggal_berangkat, data.spd.tanggal_kembali)
 				$('#giatUangHarian').val('0')
 				$('#biayaUangHarian').val('0')
 				$('#jumlahUangHarian').val('0')
+
+                dataAnggota = "<tr><td>" + data.spd.nrp + "</td><td>" + lama_giat + "</td><td>" + data.pangkat.nama_pangkat + "</td><td>" + data.personel.nama_personel +
+                    "</td><td><input type='number' name='transport' id='transport'></input></td><td><input type='number' name='u_harian' id='u_harian'></input></td>" +
+                    "<td><input type='number' name='penginapan' id='penginapan'></input></td><td><input type='number' name='total' id='total'></input></td></tr>";
+                $('#dataAnggota').html(dataAnggota)
+                addPengikut(data.spd.nrp);
 			});
 	}
 	var total_biaya = 0;
@@ -473,5 +479,29 @@
 	}).on('hidden.bs.modal', function() {
 		$('body').removeClass('modal-open')
 	})
+
+    function addPengikut(nrp) {
+        $.get("{{ route('get-pengikut-data') }}", {
+            nrp: nrp
+        }, function(data) {
+            data = JSON.parse(data)
+            console.log(data);
+            data.res.forEach(function(item, index){
+                dataPengikut += "<tr>" +
+                    "<td>" + item.spd.nama_personel + "</td>" +
+                    "<td>" + item.nrp + "</td>" +
+                    "<td>" + item.pangkat.nama_pangkat + "</td>" +
+                    "<td>" + item.spd.jabatan + "</td>" +
+                    "<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>" +
+                    "<input type='text' name='nrp_pengikut[]' value='" + nrp + "' hidden required>" +
+                    "</td>" +
+                    "<td><button type='button' class='btn btn-sm btn-danger' onclick='deletePengikut(this)'>x</button></td>" +
+                    "</tr>";
+            });
+            $('#daftarPengikut').append(dataPengikut)
+            return true;
+
+        });
+    }
 </script>
 @endsection
