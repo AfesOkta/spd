@@ -34,9 +34,10 @@ class PersonelController extends Controller
     }
 
     public function get_pengikut_data(Request $request){
-        $nrp = $request->input('nrp');
+        $id_spd = $request->input('id_spd');
 
-        $data = Pengikut::whereNrp($nrp)->get();
+        $data = Pengikut::with(['spd','personel'])->whereIdSpd($id_spd)->get();
+
         $res = $data;
         return response()->json($res->toJson());
     }

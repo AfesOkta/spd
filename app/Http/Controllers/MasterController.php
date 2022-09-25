@@ -8,6 +8,7 @@ use App\Models\Satker;
 use App\Models\Status;
 use App\Models\Tujuan;
 use App\Models\Pembayaran;
+use App\Models\Biaya;
 class MasterController extends Controller
 {
     public function index(Request $request){
@@ -16,6 +17,7 @@ class MasterController extends Controller
         $data['status'] = Status::get();
         $data['tujuan'] = Tujuan::get();
         $data['pembayaran'] = Pembayaran::get();
+        $data['biaya'] = Biaya::get();
         return view('master', $data);
     }
 
@@ -119,5 +121,20 @@ public function delete_pembayaran(Request $request){
     $pembayaran = Pembayaran::where('id_pembayaran',$request->input('id_pembayaran'))->delete();
     return redirect()->route('master')->with('tab', 'pembayaran');
 }
+//Biaya
+public function add_biaya(BiayaRequest $request)
+{
 
+}
+
+public function edit_biaya(BiayaRequest $request)
+{
+    # code...
+}
+
+public function del_biaya(Request $request)
+{
+    # code...
+}
+//
 }

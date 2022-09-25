@@ -190,12 +190,14 @@
 				$('#giatUangHarian').val('0')
 				$('#biayaUangHarian').val('0')
 				$('#jumlahUangHarian').val('0')
+                $('#optPengikut').trigger('change').val(data.count_pengikut);
 
                 dataAnggota = "<tr><td>" + data.spd.nrp + "</td><td>" + lama_giat + "</td><td>" + data.pangkat.nama_pangkat + "</td><td>" + data.personel.nama_personel +
                     "</td><td><input type='number' name='transport' id='transport'></input></td><td><input type='number' name='u_harian' id='u_harian'></input></td>" +
                     "<td><input type='number' name='penginapan' id='penginapan'></input></td><td><input type='number' name='total' id='total'></input></td></tr>";
                 $('#dataAnggota').html(dataAnggota)
-                addPengikut(data.spd.nrp);
+                addPengikut(data.spd.id_spd);
+                $('#optPengikut').val()
 			});
 	}
 	var total_biaya = 0;
@@ -481,27 +483,23 @@
 	})
 
     function addPengikut(nrp) {
+        $('#daftarPengikut').html("");
         $.get("{{ route('get-pengikut-data') }}", {
-            nrp: nrp
+            id_spd: nrp
         }, function(data) {
             data = JSON.parse(data)
             console.log(data);
-            data.res.forEach(function(item, index){
-                dataPengikut += "<tr>" +
-                    "<td>" + item.spd.nama_personel + "</td>" +
-                    "<td>" + item.nrp + "</td>" +
-                    "<td>" + item.pangkat.nama_pangkat + "</td>" +
-                    "<td>" + item.spd.jabatan + "</td>" +
-                    "<td><div class='input-group'><input type='number' name='lama[]' value='0' class='form-control' required><div class='input-group-append' ><button class='btn btn-secondary' disabled>Hari</butoon></div></div>" +
-                    "<input type='text' name='nrp_pengikut[]' value='" + nrp + "' hidden required>" +
-                    "</td>" +
-                    "<td><button type='button' class='btn btn-sm btn-danger' onclick='deletePengikut(this)'>x</button></td>" +
-                    "</tr>";
-            });
+            let dataPengikut = "";
+            for(let i=0; i < data.length; i++){
+                dataPengikut += "<tr><td>" + data[i].nrp + "</td><td>" + lama_giat + "</td><td>" + data[i].personel.jabatan + "</td><td>" + data[i].personel.nama_personel +
+                    "</td><td><input type='number' name='transport' id='transport'></input></td><td><input type='number' name='u_harian' id='u_harian'></input></td>" +
+                    "<td><input type='number' name='penginapan' id='penginapan'></input></td><td><input type='number' name='total' id='total'></input></td></tr>";
+            }
             $('#daftarPengikut').append(dataPengikut)
             return true;
 
         });
     }
+
 </script>
 @endsection

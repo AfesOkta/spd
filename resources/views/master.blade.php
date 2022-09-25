@@ -16,6 +16,9 @@
                 <a class="nav-link" href="#" id="tab_tujuan" onclick="switch_tab('tab_tujuan')">Tujuan Perjalanan</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#" id="tab_biaya" onclick="switch_tab('tab_biaya')">Biaya</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" id="tab_pembayaran" onclick="switch_tab('tab_pembayaran')">Pembayaran</a>
             </li>
         </ul>
@@ -45,8 +48,8 @@
                             <td class="text-sm p-0 m-0">{{$row->nama_pangkat}}</td>
                             <td class="text-sm p-0 m-0">{{$row->golongan}}</td>
                             <td class="text-sm p-0 m-0">
-                                <button 
-                                    class="btn btn-primary btn-sm" 
+                                <button
+                                    class="btn btn-primary btn-sm"
                                     onclick="fill_edit_pangkat('{{$row->id_pangkat}}','{{$row->nama_pangkat}}','{{$row->golongan}}')"
                                     data-toggle="modal" data-target="#editPangkatModal" >
                                     <i class="fa fa-edit"></i>
@@ -83,8 +86,8 @@
                             <td class="text-sm p-0 m-0">{{$n++}}</td>
                             <td class="text-sm p-0 m-0">{{$row->nama_satker}}</td>
                             <td class="text-sm p-0 m-0">
-                                <button 
-                                    class="btn btn-primary btn-sm" 
+                                <button
+                                    class="btn btn-primary btn-sm"
                                     onclick="fill_edit_satker('{{$row->id_satker}}','{{$row->nama_satker}}')"
                                     data-toggle="modal" data-target="#editSatkerModal" >
                                     <i class="fa fa-edit"></i>
@@ -122,8 +125,8 @@
                             <td class="text-sm p-0 m-0">{{$row->nama_tujuan}}</td>
                             <td class="text-sm p-0 m-0">Rp. {{number_format($row->uang_harian,0,',','.')}},-</td>
                             <td class="text-sm p-0 m-0">
-                                <button 
-                                    class="btn btn-primary btn-sm" 
+                                <button
+                                    class="btn btn-primary btn-sm"
                                     onclick="fill_edit_tujuan('{{$row->id_tujuan}}','{{$row->nama_tujuan}}','{{$row->uang_harian}}')"
                                     data-toggle="modal" data-target="#editTujuanModal" >
                                     <i class="fa fa-edit"></i>
@@ -158,13 +161,52 @@
                             <td class="text-sm p-0 m-0">{{$n++}}</td>
                             <td class="text-sm p-0 m-0">{{$row->pembayaran}}</td>
                             <td class="text-sm p-0 m-0">
-                                <button 
-                                    class="btn btn-primary btn-sm" 
+                                <button
+                                    class="btn btn-primary btn-sm"
                                     onclick="fill_edit_pembayaran('{{$row->id_pembayaran}}','{{$row->pembayaran}}')"
                                     data-toggle="modal" data-target="#editPembayaranModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Pembayaran?')" href="{{route('delete-pembayaran',['id_pembayaran'=>$row->id_pembayaran])}}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+<!-- ======================== Biaya Perjalanan ============================= -->
+		<div class="content" id="content-tab_biaya" style="display: none;">
+            <h3>Biaya Perjalanan</h3>
+            <button class="btn btn-sm btn-primary float-right mb-2" data-target="#addBiayaModal" data-toggle="modal">Tambah data</button>
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th class="text-lg p-0 m-0">No</th>
+                        <th class="text-lg p-0 m-0" nowrap>Nama Kegiatan/SPD</th>
+                        <th class="text-lg p-0 m-0" nowrap>Uang Kegiatan</th>
+                        <th class="text-lg p-0 m-0">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $n=1;
+                    @endphp
+                    @foreach ($biaya as $row)
+                        <tr>
+                            <td class="text-sm p-0 m-0">{{$n++}}</td>
+                            <td class="text-sm p-0 m-0">{{$row->nama_kegiatan}}</td>
+                            <td class="text-sm p-0 m-0">Rp. {{number_format($row->biaya,0,',','.')}},-</td>
+                            <td class="text-sm p-0 m-0">
+                                <button
+                                    class="btn btn-primary btn-sm"
+                                    onclick="fill_edit_biaya('{{$row->id}}','{{$row->nama_kegiatan}}','{{$row->biaya}}')"
+                                    data-toggle="modal" data-target="#editBiayaModal" >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Biaya?')" href="{{route('delete-tujuan',['id_biaya'=>$row->id])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -237,7 +279,7 @@ function fill_edit_status(id, nama)
 
 function fill_edit_tujuan(id, nama, uang)
 {
-    
+
     $('#form-tujuan-id').val(id);
     $('#form-tujuan-nama').val(nama);
     $('#form-tujuan-uang_harian').val(uang);
