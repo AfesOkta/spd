@@ -106,3 +106,7 @@ Route::get('/delete_kwitansi_rill/{id}', [KwrilController::class, 'delete_kwitan
 
 // Nominatif
 Route::post('/add_nominatif', [KwitansiLnController::class, 'add_nominatif'])->name('add-nominatif');
+
+// Biaya
+Route::post('/add_biaya',[MasterController::class,'add_biaya'])->name('add-biaya-kegiatan');
+Route::post('/edit_biaya',[MasterController::class,'edit_biaya'])->name('edit-biaya-kegiatan');

@@ -233,6 +233,9 @@
 
 <x-modal_edit_pembayaran />
 <x-modal_add_pembayaran />
+
+<x-modal_add_biaya />
+<x-modal_edit_biaya />
 @endsection
 
 @section('extra-js')

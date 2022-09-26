@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BiayaRequest;
 use Illuminate\Http\Request;
 use App\Models\Pangkat;
 use App\Models\Satker;
@@ -9,6 +10,9 @@ use App\Models\Status;
 use App\Models\Tujuan;
 use App\Models\Pembayaran;
 use App\Models\Biaya;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 class MasterController extends Controller
 {
     public function index(Request $request){
@@ -124,7 +128,24 @@ public function delete_pembayaran(Request $request){
 //Biaya
 public function add_biaya(BiayaRequest $request)
 {
+    try {
+        dd($request);
+        DB::beginTransaction();
+        $validatedData = $request->validated();
+        $data = $request->all(); 
+        
+        Biaya::create($data);
+        DB::commit();
+        $message = "Add Biaya success";
+        $status  = True;
+    }catch(\Exception $ex) {
+        Log::debug($ex->getMessage());
+        DB::rollback();
+        $message = "Add Biaya failed";
+        $status  = False;
+    }
 
+    return response()->json(["status" => $status, "message" => $message]);
 }
 
 public function edit_biaya(BiayaRequest $request)

@@ -25,7 +25,7 @@ class BiayaRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required',
+            'nama_kegiatan' => 'required',
             'biaya' => 'required|integer|size:18',
         ];
     }

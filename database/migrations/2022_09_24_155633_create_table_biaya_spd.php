@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kegiatan')->nullable()->default(null);
             $table->decimal('biaya',28,8)->default(0)->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
