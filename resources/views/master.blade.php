@@ -206,7 +206,7 @@
                                     data-toggle="modal" data-target="#editBiayaModal" >
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Biaya?')" href="{{route('delete-tujuan',['id_biaya'=>$row->id])}}">
+                                <a class="btn btn-primary btn-sm" onclick="return confirm('Hapus Biaya?')" href="{{route('delete-biaya-kegiatan',['id_biaya'=>$row->id])}}">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -286,6 +286,13 @@ function fill_edit_tujuan(id, nama, uang)
     $('#form-tujuan-id').val(id);
     $('#form-tujuan-nama').val(nama);
     $('#form-tujuan-uang_harian').val(uang);
+}
+
+function fill_edit_biaya(id, nama, uang)
+{
+    $('#form-biaya-id').val(id);
+    $('#form-nama-kegiatan').val(nama);
+    $('#form-biaya-kegiatan').val(uang);
 }
 </script>
 

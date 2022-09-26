@@ -110,3 +110,4 @@ Route::post('/add_nominatif', [KwitansiLnController::class, 'add_nominatif'])->n
 // Biaya
 Route::post('/add_biaya',[MasterController::class,'add_biaya'])->name('add-biaya-kegiatan');
 Route::post('/edit_biaya',[MasterController::class,'edit_biaya'])->name('edit-biaya-kegiatan');
+Route::get('/delete-biaya',[MasterController::class,'del_biaya'])->name('delete-biaya-kegiatan');

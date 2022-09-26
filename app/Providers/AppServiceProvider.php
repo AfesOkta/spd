@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Biaya;
+use App\Observers\BiayaObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        // Biaya::observe(BiayaObserver::class);
     }
 }

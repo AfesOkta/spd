@@ -126,36 +126,28 @@ public function delete_pembayaran(Request $request){
     return redirect()->route('master')->with('tab', 'pembayaran');
 }
 //Biaya
-public function add_biaya(BiayaRequest $request)
+public function add_biaya(Request $request)
 {
-    try {
-        dd($request);
-        DB::beginTransaction();
-        $validatedData = $request->validated();
-        $data = $request->all(); 
-        
-        Biaya::create($data);
-        DB::commit();
-        $message = "Add Biaya success";
-        $status  = True;
-    }catch(\Exception $ex) {
-        Log::debug($ex->getMessage());
-        DB::rollback();
-        $message = "Add Biaya failed";
-        $status  = False;
-    }
-
-    return response()->json(["status" => $status, "message" => $message]);
+    $biaya = Biaya::insert([
+        'nama_kegiatan'=>$request->input('nama_kegiatan'),
+        'biaya'=>$request->input('biaya')
+    ]);
+    return redirect()->route('master')->with('tab', 'biaya');
 }
 
-public function edit_biaya(BiayaRequest $request)
+public function edit_biaya(Request $request)
 {
-    # code...
+    $biaya = Biaya::find($request->input('id_biaya'));
+    $biaya->nama_kegiatan  = $request->input('nama_kegiatan');
+    $biaya->biaya = $request->input('biaya');
+    $biaya->save();
+    return redirect()->route('master')->with('tab', 'biaya');
 }
 
 public function del_biaya(Request $request)
 {
-    # code...
+    $biaya = Biaya::where('id',$request->input('id_biaya'))->delete();
+    return redirect()->route('master')->with('tab', 'biaya');
 }
 //
 }
