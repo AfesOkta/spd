@@ -121,6 +121,32 @@
 @include('components.modal_add_nominatif')
 
 <script>
+    // var rupiah = document.getElementById("transport");
+    // rupiah.addEventListener("keyup", function(e) {
+    //     rupiah.value = formatRupiah(this.value, " ");
+    // });
+
+    document.querySelectorAll('input[type-currency="IDR"]').forEach((element) => {
+        element.addEventListener('keyup',function(e) {
+            let cursorPostion = this.selectionStart;
+            let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+            let originalLength = this.value.length;
+            if(isNaN(value)){
+                this.value = "";
+            }else{
+                this.value = value.toLocaleString('id-ID', {
+                    currency: 'IDR',
+                    style: 'currency',
+                    minimumFractionDigits: 0
+                });
+                cursorPostion = this.value.length - originalLength + cursorPostion;
+                this.setSelectionRange(cursorPostion, cursorPostion);
+
+            }
+        })
+    })
+
+
 	function calculate_day(start, end) {
 		let start_date = new Date(start);
 		// console.log(start_date)
@@ -183,7 +209,7 @@
 
 				$('#jnsSpd').val(data.spd.jenis_spd)
 				$('#tujuanSPD').val(data.tujuan.nama_tujuan)
-				$('#nominalSpd').val(data.pangkat.nama_pangkat + '/' + data.personel.nrp)
+				$('#nominalSpd').val(data.tujuan.uang_harian)
 
 				// uang Harian
 				lama_giat = calculate_day(data.spd.tanggal_berangkat, data.spd.tanggal_kembali)
@@ -193,8 +219,8 @@
                 $('#optPengikut').trigger('change').val(data.count_pengikut);
 
                 dataAnggota = "<tr><td>" + data.spd.nrp + "</td><td>" + lama_giat + "</td><td>" + data.pangkat.nama_pangkat + "</td><td>" + data.personel.nama_personel +
-                    "</td><td><input type='number' name='transport' id='transport'></input></td><td><input type='number' name='u_harian' id='u_harian'></input></td>" +
-                    "<td><input type='number' name='penginapan' id='penginapan'></input></td><td><input type='number' name='total' id='total'></input></td></tr>";
+                    "</td><td><input type='text' name='transport' class='transport text-right' id='transport' value='0' type-currency='IDR'></input></td><td><input type='number' class='u_harian' name='u_harian' id='u_harian' value='0' type-currency='IDR'></input></td>" +
+                    "<td><input type='number' name='penginapan' class='penginapan text-right'  id='penginapan' value='0' type-currency='IDR'></input></td><td><input type='number' name='total' id='total'  class='total'  readonly value='0' type-currency='IDR'></input></td></tr>";
                 $('#dataAnggota').html(dataAnggota)
                 addPengikut(data.spd.id_spd);
                 $('#optPengikut').val()
@@ -492,8 +518,8 @@
             let dataPengikut = "";
             for(let i=0; i < data.length; i++){
                 dataPengikut += "<tr><td>" + data[i].nrp + "</td><td>" + lama_giat + "</td><td>" + data[i].personel.jabatan + "</td><td>" + data[i].personel.nama_personel +
-                    "</td><td><input type='number' name='transport' id='transport'></input></td><td><input type='number' name='u_harian' id='u_harian'></input></td>" +
-                    "<td><input type='number' name='penginapan' id='penginapan'></input></td><td><input type='number' name='total' id='total'></input></td></tr>";
+                    "</td><td><input type='number' class='transport' name='transport' id='transport"+[i]+"' value='0' type-currency='IDR'></input></td><td><input type='number' name='u_harian' class='u_harian' id='u_harian"+[i]+"' value='0' type-currency='IDR'></input></td>" +
+                    "<td><input type='number' name='penginapan' class='penginapan' id='penginapan"+[i]+"' value='0' type-currency='IDR'></input></td><td><input type='number' name='total_pengikut[]' class='total_pengikut' id='totalPengikut"+[i]+"' readonly value='0' type-currency='IDR'></input></td></tr>";
             }
             $('#daftarPengikut').append(dataPengikut)
             return true;

@@ -136,7 +136,6 @@
         </a>
     </div>
     <div class="p-2">
-        <a href="#" id="btnPengeluaranRill" data-dismiss="modal" data-backdrop="false" onclick="fill_edit_rill()">Pengeluaran Rill</a>
       <button type="submit" class="btn btn-success">Simpan</button>
       <button type="button" class="btn btn-secondary closeModal"  data-dismiss="modal" >Close</button>
   </div>
